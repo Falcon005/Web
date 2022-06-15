@@ -17,6 +17,8 @@
           <element id="library" level="project" name="Maven: jakarta.servlet.jsp:jakarta.servlet.jsp-api:3.0.0" />
           <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-api:2.13.2" />
           <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-core:2.13.2" />
+          <element id="library" level="project" name="Maven: org.postgresql:postgresql:42.4.0" />
+          <element id="library" level="project" name="Maven: org.checkerframework:checker-qual:3.5.0" />
         </element>
       </element>
       <element id="directory" name="META-INF">
