@@ -1,5 +1,6 @@
 package by.ashurmatov.anime.model.service.impl;
 
+import by.ashurmatov.anime.exception.DaoException;
 import by.ashurmatov.anime.model.dao.impl.UserDaoImpl;
 import by.ashurmatov.anime.model.service.UserService;
 
@@ -14,7 +15,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean loginAuthenticate(String login, String password) {
+    public boolean loginAuthenticate(String login, String password){
         //todo
         //Validate login and password
         UserDaoImpl userDao = UserDaoImpl.getInstance();

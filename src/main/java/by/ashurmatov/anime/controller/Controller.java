@@ -2,6 +2,7 @@ package by.ashurmatov.anime.controller;
 
 import by.ashurmatov.anime.controller.command.Command;
 import by.ashurmatov.anime.controller.command.CommandType;
+import by.ashurmatov.anime.exception.DaoException;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
@@ -22,7 +23,12 @@ public class Controller extends HttpServlet {
         response.setContentType("text/html");
         String commandStr = request.getParameter("command");
         Command command = CommandType.defineCommand(commandStr);
-        String page = command.execute(request);
+        String page = null;
+        try {
+            page = command.execute(request);
+        } catch (DaoException e) {
+            e.printStackTrace();
+        }
         request.getRequestDispatcher(page).forward(request,response);
     }
 }
