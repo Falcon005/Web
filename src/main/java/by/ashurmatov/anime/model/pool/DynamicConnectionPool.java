@@ -19,7 +19,7 @@ public class DynamicConnectionPool {
     private static final int MAX_POOL_SIZE = 32;
     private final AtomicInteger currentPoolSize = new AtomicInteger(MIN_POOL_SIZE);
 
-    private static DynamicConnectionPool instance = new DynamicConnectionPool();
+    private static final DynamicConnectionPool instance = new DynamicConnectionPool();
 
     private final BlockingQueue<ProxyConnection> freeConnections;
     private final BlockingQueue<ProxyConnection> givenAwayConnections;
@@ -33,6 +33,7 @@ public class DynamicConnectionPool {
         }catch (SQLException e){
             logger.warn("Error while registering drive", e);
         }
+
         freeConnections = new LinkedBlockingQueue<>();
         for(int i=0;i<MIN_POOL_SIZE;i++){
             Connection connection;

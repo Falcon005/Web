@@ -9,6 +9,6 @@
 <%--</h1>--%>
 <%--<br/>--%>
 <%--<a href="hello-servlet">Hello Servlet</a>--%>
-<jsp:forward page="WEB-INF/pages/jsp/authenticate/login.jsp"></jsp:forward>
+<jsp:forward page="pages/jsp/authenticate/login.jsp"></jsp:forward>
 </body>
 </html>

@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<fmt:setLocale value="uz" scope="session"/>
+<fmt:setLocale value="ru" scope="session"/>
 <fmt:setBundle basename="prop.language"/>
 <html>
 <head>
@@ -15,7 +15,7 @@
 </head>
 <body>
 
-<h1><fmt:message key="label.hello"/> ${requestScope.get("user")}</h1>
-<h2><fmt:message key="label.welcome"/></h2>
+<h2><fmt:message key="label.hello"/> ${requestScope.get("user")}</h2>
+<h3><fmt:message key="label.welcome"/></h3>
 </body>
 </html>

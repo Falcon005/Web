@@ -37,4 +37,5 @@ public class ConnectionCreator {
     public static Connection createConnection() throws SQLException{
         return DriverManager.getConnection(PROPERTIES.getProperty(URL_PROPERTY),PROPERTIES);
     }
+
 }

@@ -1,6 +1,6 @@
 package by.ashurmatov.anime.model.entity;
 
-import by.ashurmatov.anime.model.entity.enums.Role;
+import by.ashurmatov.anime.model.entity.type.Role;
 
 import java.util.Objects;
 
@@ -8,20 +8,13 @@ public class User extends AbstractEntity{
     private int id;
     private String email;
     private Role role;
-    private String firstName;
-    private String secondName;
+    private String firstname;
+
+    private String lastname;
     private String userName;
+    private String password;
 
     public User() {
-    }
-
-    public User(int id, String email, Role role, String firstName, String secondName, String userName) {
-        this.id = id;
-        this.email = email;
-        this.role = role;
-        this.firstName = firstName;
-        this.secondName = secondName;
-        this.userName = userName;
     }
 
     public int getId() {
@@ -48,20 +41,20 @@ public class User extends AbstractEntity{
         this.role = role;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
-    public String getSecondName() {
-        return secondName;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setSecondName(String secondName) {
-        this.secondName = secondName;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public String getUserName() {
@@ -72,17 +65,25 @@ public class User extends AbstractEntity{
         this.userName = userName;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return id == user.id && Objects.equals(email, user.email) && role == user.role && Objects.equals(firstName, user.firstName) && Objects.equals(secondName, user.secondName) && Objects.equals(userName, user.userName);
+        return id == user.id && Objects.equals(email, user.email) && role == user.role && Objects.equals(firstname, user.firstname) && Objects.equals(lastname, user.lastname) && Objects.equals(userName, user.userName) && Objects.equals(password, user.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, email, role, firstName, secondName, userName);
+        return Objects.hash(id, email, role, firstname, lastname, userName, password);
     }
 
     @Override
@@ -91,9 +92,10 @@ public class User extends AbstractEntity{
                 "id=" + id +
                 ", email='" + email + '\'' +
                 ", role=" + role +
-                ", firstName='" + firstName + '\'' +
-                ", secondName='" + secondName + '\'' +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
                 ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
                 '}';
     }
 }
