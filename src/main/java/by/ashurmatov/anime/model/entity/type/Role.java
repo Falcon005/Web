@@ -7,7 +7,4 @@ public enum Role {
     Role(){
     }
 
-//    public int getPriority() {
-//        return priority;
-//    }
 }

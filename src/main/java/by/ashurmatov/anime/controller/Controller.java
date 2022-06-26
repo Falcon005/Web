@@ -2,7 +2,9 @@ package by.ashurmatov.anime.controller;
 
 import by.ashurmatov.anime.controller.command.Command;
 import by.ashurmatov.anime.controller.command.CommandType;
+import by.ashurmatov.anime.exception.CommandException;
 import by.ashurmatov.anime.exception.DaoException;
+import by.ashurmatov.anime.model.pool.DynamicConnectionPool;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
@@ -10,6 +12,12 @@ import jakarta.servlet.http.*;
 import java.io.IOException;
 @WebServlet(name = "Controller",urlPatterns = {"/controller.do"})
 public class Controller extends HttpServlet {
+
+    @Override
+    public void init() throws ServletException {
+
+    }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processRequest(request,response);
@@ -26,9 +34,16 @@ public class Controller extends HttpServlet {
         String page = null;
         try {
             page = command.execute(request);
-        } catch (DaoException e) {
-            e.printStackTrace();
+            request.getRequestDispatcher(page).forward(request,response);
+        } catch (CommandException e) {
+//            response.sendError(500);
+            throw new ServletException(e);
         }
-        request.getRequestDispatcher(page).forward(request,response);
+
+    }
+
+    @Override
+    public void destroy() {
+        DynamicConnectionPool.getInstance().destroyPool();
     }
 }

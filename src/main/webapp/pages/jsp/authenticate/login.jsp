@@ -51,7 +51,7 @@
                             Forgot Password?
                         </a>
                         <input type="password" name="password" class="form-control form-control-sm"
-                               id="exampleInputPassword1" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$">
+                               id="exampleInputPassword1" >
                     </div>
                     <button type="submit" class="btn btn-primary btn-block">Sign In</button>
 

@@ -1,6 +1,7 @@
 package by.ashurmatov.anime.model.service.impl;
 
 import by.ashurmatov.anime.exception.DaoException;
+import by.ashurmatov.anime.exception.ServiceException;
 import by.ashurmatov.anime.model.dao.impl.UserDaoImpl;
 import by.ashurmatov.anime.model.entity.User;
 import by.ashurmatov.anime.model.service.UserService;
@@ -20,18 +21,24 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean loginAuthenticate(String login, String password){
-        //todo
-        //Validate login and password
+    public boolean loginAuthenticate(String login, String password) throws ServiceException{
         UserDaoImpl userDao = UserDaoImpl.getInstance();
-        return userDao.authenticate(login,password);
+        try {
+            return userDao.authenticate(login,password);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
     }
 
 
     @Override
-    public boolean add(User user) {
-        // todo validation
-        boolean isSaved = userDao.insert(user);
+    public boolean add(User user) throws ServiceException{
+        boolean isSaved = false;
+        try {
+            isSaved = userDao.insert(user);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
         return isSaved;
     }
 

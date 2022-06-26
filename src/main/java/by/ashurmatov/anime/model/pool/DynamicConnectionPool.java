@@ -31,6 +31,7 @@ public class DynamicConnectionPool {
         try{
             DriverManager.registerDriver(new org.postgresql.Driver());
         }catch (SQLException e){
+
             logger.warn("Error while registering drive", e);
         }
 

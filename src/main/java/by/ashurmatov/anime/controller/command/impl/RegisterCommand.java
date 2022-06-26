@@ -1,29 +1,32 @@
 package by.ashurmatov.anime.controller.command.impl;
 
 import by.ashurmatov.anime.controller.command.Command;
-import by.ashurmatov.anime.controller.command.PagePath;
-import by.ashurmatov.anime.controller.command.ParameterName;
+import by.ashurmatov.anime.controller.path.PagePath;
+import by.ashurmatov.anime.controller.attribute.RequestParameterName;
+import by.ashurmatov.anime.exception.CommandException;
+import by.ashurmatov.anime.exception.ServiceException;
 import by.ashurmatov.anime.model.entity.User;
 import by.ashurmatov.anime.model.service.UserService;
 import by.ashurmatov.anime.model.service.impl.UserServiceImpl;
 import by.ashurmatov.anime.model.validator.UserValidator;
 import jakarta.servlet.http.HttpServletRequest;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class RegisterCommand implements Command {
     Logger logger= LogManager.getLogger();
     @Override
-    public String execute(HttpServletRequest request) {
-        String email=request.getParameter(ParameterName.EMAIL);
-        String firstname=request.getParameter(ParameterName.FIRSTNAME);
-        String lastname = request.getParameter(ParameterName.LASTNAME);
-        String username=request.getParameter(ParameterName.USERNAME);
-        String password = request.getParameter(ParameterName.PASSWORD);
+    public String execute(HttpServletRequest request) throws CommandException {
+        String email=request.getParameter(RequestParameterName.EMAIL);
+        String firstname=request.getParameter(RequestParameterName.FIRSTNAME);
+        String lastname = request.getParameter(RequestParameterName.LASTNAME);
+        String username=request.getParameter(RequestParameterName.USERNAME);
+        String password = request.getParameter(RequestParameterName.PASSWORD);
         String page;
-
+        boolean isSaved;
         String errorMessage = UserValidator.validateUserForRegister(email,firstname,lastname,username,password);
-        if(!errorMessage.equals("")) {
+        if(!errorMessage.isEmpty()) {
             page = PagePath.REGISTER;
         } else{
             UserService userService=UserServiceImpl.getInstance();
@@ -36,13 +39,19 @@ public class RegisterCommand implements Command {
             user.setUserName(username);
             user.setPassword(password);
 
+            try {
+                isSaved = userService.add(user);
+            } catch (ServiceException e) {
+                throw new CommandException(e);
+            }
 
-            logger.info(user);
-            if (userService.add(user)){
+            if (isSaved){
+                logger.log(Level.INFO,"User is saved");
                 request.setAttribute("user",user.getUserName());
                 page = PagePath.HOME;
             }
             else{
+                logger.log(Level.INFO,"User is not saved");
                 request.setAttribute("registrationError","Invalid  data");
                 page = PagePath.REGISTER;
             }
