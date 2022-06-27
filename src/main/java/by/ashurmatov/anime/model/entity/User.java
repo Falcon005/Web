@@ -1,13 +1,13 @@
 package by.ashurmatov.anime.model.entity;
 
-import by.ashurmatov.anime.model.entity.type.Role;
+import by.ashurmatov.anime.model.entity.type.UserRole;
 
 import java.util.Objects;
 
 public class User extends AbstractEntity{
     private int id;
     private String email;
-    private Role role;
+    private UserRole role;
     private String firstname;
 
     private String lastname;
@@ -33,11 +33,11 @@ public class User extends AbstractEntity{
         this.email = email;
     }
 
-    public Role getRole() {
+    public UserRole getRole() {
         return role;
     }
 
-    public void setRole(Role role) {
+    public void setRole(UserRole role) {
         this.role = role;
     }
 

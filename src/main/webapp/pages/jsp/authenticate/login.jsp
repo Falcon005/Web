@@ -58,7 +58,7 @@
                     <div class="signup">
                         Don't have an account? <a href="${pageContext.request.contextPath}/pages/jsp/authenticate/registration.jsp">Create One</a>
                     </div>
-                    ${requestScope.get("ErrorInLoginOrPassword")}
+                    ${requestScope.get("error_message")}
                 </form>
             </div>
         </div>

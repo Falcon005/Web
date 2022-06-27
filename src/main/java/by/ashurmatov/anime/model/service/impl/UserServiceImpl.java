@@ -4,6 +4,7 @@ import by.ashurmatov.anime.exception.DaoException;
 import by.ashurmatov.anime.exception.ServiceException;
 import by.ashurmatov.anime.model.dao.impl.UserDaoImpl;
 import by.ashurmatov.anime.model.entity.User;
+import by.ashurmatov.anime.model.entity.type.UserRole;
 import by.ashurmatov.anime.model.service.UserService;
 
 import java.util.List;
@@ -32,7 +33,7 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public boolean add(User user) throws ServiceException{
+    public boolean register(User user) throws ServiceException{
         boolean isSaved = false;
         try {
             isSaved = userDao.insert(user);
@@ -55,6 +56,41 @@ public class UserServiceImpl implements UserService {
     @Override
     public Optional<User> findById(Long id) {
         return Optional.empty();
+    }
+
+    @Override
+    public Optional<User> findByLogin(String login) throws ServiceException {
+        return Optional.empty();
+    }
+
+    @Override
+    public UserRole findUserRole(String login) throws ServiceException {
+        return null;
+    }
+
+    @Override
+    public boolean deleteByLogin(String login) throws ServiceException {
+        return false;
+    }
+
+    @Override
+    public boolean updateUser(User user) throws ServiceException {
+        return false;
+    }
+
+    @Override
+    public boolean updatePassword(String login, String newPassword) throws ServiceException {
+        return false;
+    }
+
+    @Override
+    public boolean isLoginAvailable(String login) throws ServiceException {
+        return false;
+    }
+
+    @Override
+    public boolean isEmailAvailable(String email) throws ServiceException {
+        return false;
     }
 
     @Override

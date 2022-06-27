@@ -61,14 +61,16 @@
                     <div class="login">
                         Do you have an account? <a href="${pageContext.request.contextPath}/pages/jsp/authenticate/login.jsp">Login</a>
                     </div>
-                    ${requestScope.get("registrationError")}
+                    ${requestScope.get("user")}
+                    ${requestScope.get("unavailable_login")}
+                    ${requestScope.get("unavailable_email_address")}
                 </form>
-
             </div>
         </div>
     </div>
 </div>
-
-</form>
+${requestScope.get("user")}
+${requestScope.get("unavailable_login")}
+${requestScope.get("unavailable_email_address")}
 </body>
 </html>

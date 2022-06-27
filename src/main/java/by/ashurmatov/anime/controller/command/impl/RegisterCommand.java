@@ -1,8 +1,9 @@
 package by.ashurmatov.anime.controller.command.impl;
 
 import by.ashurmatov.anime.controller.command.Command;
+import by.ashurmatov.anime.controller.command.Router;
 import by.ashurmatov.anime.controller.path.PagePath;
-import by.ashurmatov.anime.controller.attribute.RequestParameterName;
+import by.ashurmatov.anime.controller.attribute.ParameterName;
 import by.ashurmatov.anime.exception.CommandException;
 import by.ashurmatov.anime.exception.ServiceException;
 import by.ashurmatov.anime.model.entity.User;
@@ -14,74 +15,70 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+
+
 public class RegisterCommand implements Command {
-    Logger logger= LogManager.getLogger();
+    private static final Logger logger= LogManager.getLogger(RegisterCommand.class);
+
+    private static final String ALREADY_EXISTING_LOGIN = " - already existing login";
+    private static final String ALREADY_EXISTING_EMAIL = " - already existing email";
+    private static final String ERROR_IN_FILLING_FIELD = "Error in filling field";
+    private static final String ERROR_FOR_VALIDATION_IN_FIELDS = "Error for validation for fields";
     @Override
-    public String execute(HttpServletRequest request) throws CommandException {
-        String email=request.getParameter(RequestParameterName.EMAIL);
-        String firstname=request.getParameter(RequestParameterName.FIRSTNAME);
-        String lastname = request.getParameter(RequestParameterName.LASTNAME);
-        String username=request.getParameter(RequestParameterName.USERNAME);
-        String password = request.getParameter(RequestParameterName.PASSWORD);
-        String page;
-        boolean isSaved;
+    public Router execute(HttpServletRequest request) throws CommandException {
+
+        UserService userService=UserServiceImpl.getInstance();
+        String email=request.getParameter(ParameterName.EMAIL);
+        String firstname=request.getParameter(ParameterName.FIRSTNAME);
+        String lastname = request.getParameter(ParameterName.LASTNAME);
+        String username=request.getParameter(ParameterName.USERNAME);
+        String password = request.getParameter(ParameterName.PASSWORD);
+
+        logger.log(Level.INFO,"Email of user is " + email);
+        logger.log(Level.INFO,"Firstname of user is " + firstname);
+        logger.log(Level.INFO,"Lastname of user is " + lastname);
+        logger.log(Level.INFO,"Username of user is " + username);
+        logger.log(Level.INFO,"Password of user is " + password);
+
+
+
         String errorMessage = UserValidator.validateUserForRegister(email,firstname,lastname,username,password);
         if(!errorMessage.isEmpty()) {
-            page = PagePath.REGISTER;
+            request.setAttribute(ParameterName.ERROR_IN_VALIDATION,ERROR_FOR_VALIDATION_IN_FIELDS);
+            return new Router(PagePath.REGISTER_PAGE,Router.Type.REDIRECT);
         } else{
-            UserService userService=UserServiceImpl.getInstance();
 
-            User user=new User();
+            User user = new User();
+            try{
+                if (userService.isLoginAvailable(username)) {
+                    user.setUserName(username);
+                }else {
+                    request.setAttribute(ParameterName.UNAVAILABLE_LOGIN, username + ALREADY_EXISTING_LOGIN);
+                    return new Router(PagePath.REGISTER_PAGE,Router.Type.FORWARD);
+                }
+                if (userService.isEmailAvailable(email)) {
+                    user.setEmail(email);
+                }else{
+                    request.setAttribute(ParameterName.UNAVAILABLE_EMAIL_ADDRESS, email + ALREADY_EXISTING_EMAIL);
+                    return new Router(PagePath.REGISTER_PAGE,Router.Type.FORWARD);
+                }
+                user.setFirstname(firstname);
+                user.setLastname(lastname);
+                user.setPassword(password);
+                request.setAttribute(ParameterName.USER,user);
+                if(userService.register(user)) {
+                    return new Router(PagePath.HOME_PAGE,Router.Type.FORWARD);
+                }else {
+                    request.setAttribute(ParameterName.ERROR_IN_VALIDATION,ERROR_IN_FILLING_FIELD);
+                    return new Router(PagePath.REGISTER_PAGE,Router.Type.FORWARD);
+                }
 
-            user.setEmail(email);
-            user.setFirstname(firstname);
-            user.setLastname(lastname);
-            user.setUserName(username);
-            user.setPassword(password);
-
-            try {
-                isSaved = userService.add(user);
-            } catch (ServiceException e) {
+            }catch (ServiceException e){
+                logger.error("error in registering a new user", e);
                 throw new CommandException(e);
-            }
-
-            if (isSaved){
-                logger.log(Level.INFO,"User is saved");
-                request.setAttribute("user",user.getUserName());
-                page = PagePath.HOME;
-            }
-            else{
-                logger.log(Level.INFO,"User is not saved");
-                request.setAttribute("registrationError","Invalid  data");
-                page = PagePath.REGISTER;
             }
 
 
         }
-        return page;
-
-//        UserService userService=UserServiceImpl.getInstance();
-//
-//        User user=new User();
-//
-//        user.setEmail(email);
-//        user.setFirstname(firstname);
-//        user.setLastname(lastname);
-//        user.setUserName(username);
-//        user.setPassword(password);
-//
-//
-//        logger.info(user);
-//        if (userService.add(user)){
-//            request.setAttribute("user",user.getUserName());
-//            page = PagePath.HOME;
-//        }
-//        else{
-//            request.setAttribute("registrationError","Invalid  data");
-//            page = PagePath.REGISTER;
-//        }
-//
-//        return page;
-
     }
 }
