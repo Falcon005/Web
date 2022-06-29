@@ -8,7 +8,7 @@
         <error-code>404</error-code>
         <location>/pages/jsp/error/error_404.jsp</location>
     </error-page>
-    
+
     <error-page>
         <error-code>500</error-code>
         <location>/pages/jsp/error/error_500.jsp</location>

@@ -6,10 +6,11 @@ import by.ashurmatov.anime.controller.path.PagePath;
 import by.ashurmatov.anime.controller.attribute.ParameterName;
 import by.ashurmatov.anime.exception.CommandException;
 import by.ashurmatov.anime.exception.ServiceException;
-import by.ashurmatov.anime.model.entity.User;
-import by.ashurmatov.anime.model.service.UserService;
-import by.ashurmatov.anime.model.service.impl.UserServiceImpl;
-import by.ashurmatov.anime.model.validator.UserValidator;
+import by.ashurmatov.anime.entity.User;
+import by.ashurmatov.anime.entity.type.UserRole;
+import by.ashurmatov.anime.service.UserService;
+import by.ashurmatov.anime.service.impl.UserServiceImpl;
+import by.ashurmatov.anime.validator.UserValidator;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -45,6 +46,7 @@ public class RegisterCommand implements Command {
         String errorMessage = UserValidator.validateUserForRegister(email,firstname,lastname,username,password);
         if(!errorMessage.isEmpty()) {
             request.setAttribute(ParameterName.ERROR_IN_VALIDATION,ERROR_FOR_VALIDATION_IN_FIELDS);
+
             return new Router(PagePath.REGISTER_PAGE,Router.Type.REDIRECT);
         } else{
 
@@ -54,17 +56,20 @@ public class RegisterCommand implements Command {
                     user.setUserName(username);
                 }else {
                     request.setAttribute(ParameterName.UNAVAILABLE_LOGIN, username + ALREADY_EXISTING_LOGIN);
+                    logger.info("ALREADY EXISTING LOGIN");
                     return new Router(PagePath.REGISTER_PAGE,Router.Type.FORWARD);
                 }
                 if (userService.isEmailAvailable(email)) {
                     user.setEmail(email);
                 }else{
                     request.setAttribute(ParameterName.UNAVAILABLE_EMAIL_ADDRESS, email + ALREADY_EXISTING_EMAIL);
+                    logger.info("ALREADY EXISTING EMAIL");
                     return new Router(PagePath.REGISTER_PAGE,Router.Type.FORWARD);
                 }
                 user.setFirstname(firstname);
                 user.setLastname(lastname);
                 user.setPassword(password);
+                user.setRole(UserRole.USER);
                 request.setAttribute(ParameterName.USER,user);
                 if(userService.register(user)) {
                     return new Router(PagePath.HOME_PAGE,Router.Type.FORWARD);

@@ -5,7 +5,6 @@ import by.ashurmatov.anime.controller.command.Command;
 import by.ashurmatov.anime.controller.command.CommandType;
 import by.ashurmatov.anime.controller.command.Router;
 import by.ashurmatov.anime.exception.CommandException;
-import by.ashurmatov.anime.model.pool.DynamicConnectionPool;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
@@ -56,6 +55,6 @@ public class Controller extends HttpServlet {
 
     @Override
     public void destroy() {
-        DynamicConnectionPool.getInstance().destroyPool();
+//        DynamicConnectionPool.getInstance().destroyPool();
     }
 }

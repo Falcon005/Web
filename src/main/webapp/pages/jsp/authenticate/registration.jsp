@@ -47,13 +47,13 @@
                         <label for="exampleInputUserName1">UserName or Login</label>
 
                         <input type="text" name="username" class="form-control form-control-sm"
-                               id="exampleInputUserName1" pattern="">
+                               id="exampleInputUserName1" >
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Password</label>
 
                         <input type="password" name="password" class="form-control form-control-sm"
-                               id="exampleInputPassword1" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$">
+                               id="exampleInputPassword1">
                     </div>
 
                     <button type="submit" class="btn btn-primary btn-block">Register</button>

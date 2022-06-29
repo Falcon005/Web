@@ -8,6 +8,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    ti
+
+    <title>Login Page</title>
     <meta charset="UTF-8"/>
     <meta name="viewport"content="width=device-width, initial-scale=.0"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css"/>
@@ -54,7 +57,7 @@
                                id="exampleInputPassword1" >
                     </div>
                     <button type="submit" class="btn btn-primary btn-block">Sign In</button>
-
+<%--                    <input type="submit" class="btn btn-primary btn-block">Sign In</input>--%>
                     <div class="signup">
                         Don't have an account? <a href="${pageContext.request.contextPath}/pages/jsp/authenticate/registration.jsp">Create One</a>
                     </div>
