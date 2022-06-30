@@ -4,6 +4,7 @@ import by.ashurmatov.anime.controller.command.Command;
 import by.ashurmatov.anime.controller.command.Router;
 import by.ashurmatov.anime.controller.path.PagePath;
 import by.ashurmatov.anime.controller.attribute.ParameterName;
+import by.ashurmatov.anime.entity.type.Status;
 import by.ashurmatov.anime.exception.CommandException;
 import by.ashurmatov.anime.exception.ServiceException;
 import by.ashurmatov.anime.entity.User;
@@ -70,6 +71,7 @@ public class RegisterCommand implements Command {
                 user.setLastname(lastname);
                 user.setPassword(password);
                 user.setRole(UserRole.USER);
+                user.setStatus(Status.ACTIVE);
                 request.setAttribute(ParameterName.USER,user);
                 if(userService.register(user)) {
                     return new Router(PagePath.HOME_PAGE,Router.Type.FORWARD);

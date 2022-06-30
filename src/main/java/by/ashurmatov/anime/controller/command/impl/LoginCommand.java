@@ -6,6 +6,7 @@ import by.ashurmatov.anime.controller.command.Router;
 import by.ashurmatov.anime.controller.path.PagePath;
 import by.ashurmatov.anime.controller.attribute.ParameterName;
 import by.ashurmatov.anime.entity.User;
+import by.ashurmatov.anime.entity.type.Status;
 import by.ashurmatov.anime.entity.type.UserRole;
 import by.ashurmatov.anime.exception.CommandException;
 import by.ashurmatov.anime.exception.ServiceException;
@@ -23,6 +24,7 @@ import java.util.Optional;
 public class LoginCommand implements Command {
     private static final Logger logger = LogManager.getLogger(LoginCommand.class);
     private static final String ERROR_MESSAGE = "incorrect login or password";
+    private static final String ERROR_MESSAGE_FOR_BLOCK_USER = "Sorry, you are blocked. Please Go to the registration page";
     @Override
     public Router execute(HttpServletRequest request) throws CommandException {
         boolean isMatched;
@@ -31,28 +33,7 @@ public class LoginCommand implements Command {
         HttpSession session = request.getSession();
         Router router;
         UserService userService = UserServiceImpl.getInstance();
-//        if(UserValidator.isLoginValid(userName) && UserValidator.isPasswordValid(password)) {
-//            try {
-//                isMatched = userService.loginAuthenticate(userName,password);
-//            } catch (ServiceException e) {
-//                logger.error("Error in Login ", e);
-//                throw new CommandException(e);
-//            }
-//            if (isMatched) {
-//                UserRole userRole = userService.findUserRole(userName);
-//                request.setAttribute(ParameterName.USERNAME,userName);
-//                session.setAttribute(ParameterName.USERNAME,userName);
-//                session.setAttribute(ParameterName.PASSWORD,password);
-//                router = new Router(PagePath.HOME_PAGE,Router.Type.FORWARD);
-//            }else {
-//                request.setAttribute(ParameterName.ERROR_MESSAGE_LOGIN,ERROR_MESSAGE);
-//                router = new Router(PagePath.LOGIN_PAGE,Router.Type.FORWARD);
-//            }
-//        }else {
-//            request.setAttribute(ParameterName.ERROR_MESSAGE_LOGIN,ERROR_MESSAGE);
-//            router = new Router(PagePath.LOGIN_PAGE,Router.Type.FORWARD);
-//        }
-//        return router;
+
         try {
             if(UserValidator.isLoginValid(userName) && UserValidator.isPasswordValid(password)) {
 
@@ -60,17 +41,24 @@ public class LoginCommand implements Command {
 
                 if (isMatched) {
                     UserRole userRole = userService.findUserRole(userName);
+                    Status userStatus = userService.findUserStatus(userName);
                     Optional<User> optionalUser = userService.findByLogin(userName);
                     optionalUser.ifPresent(user -> session.setAttribute(SessionAttributeName.USER,user));
                     request.setAttribute(ParameterName.USERNAME,userName);
                     session.setAttribute(SessionAttributeName.USERNAME,userName);
-                    session.setAttribute(SessionAttributeName.PASSWORD,password);
+//                    session.setAttribute(SessionAttributeName.PASSWORD,password); DEPRECATED
                     session.setAttribute(SessionAttributeName.USER_ROLE,userRole);
+                    session.setAttribute(SessionAttributeName.USER_STATUS,userStatus);
 
                     if (session.getAttribute(SessionAttributeName.USER_ROLE) == UserRole.ADMIN) {
                         router = new Router(PagePath.ADMIN_PAGE,Router.Type.FORWARD);
                     } else {
-                        router = new Router(PagePath.HOME_PAGE,Router.Type.FORWARD);
+                        if (session.getAttribute(SessionAttributeName.USER_STATUS) == Status.BLOCKED) {
+                            request.setAttribute(ParameterName.ERROR_IN_BLOCKING,ERROR_MESSAGE_FOR_BLOCK_USER);
+                            router = new Router(PagePath.LOGIN_PAGE,Router.Type.FORWARD);
+                        } else {
+                            router = new Router(PagePath.HOME_PAGE,Router.Type.FORWARD);
+                        }
                     }
                 }else {
                     request.setAttribute(ParameterName.ERROR_MESSAGE_LOGIN,ERROR_MESSAGE);

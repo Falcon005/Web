@@ -1,5 +1,6 @@
 package by.ashurmatov.anime.entity;
 
+import by.ashurmatov.anime.entity.type.Status;
 import by.ashurmatov.anime.entity.type.UserRole;
 
 import java.util.Objects;
@@ -13,6 +14,7 @@ public class User extends AbstractEntity{
     private String lastname;
     private String userName;
     private String password;
+    private Status status;
 
     public User() {
     }
@@ -73,17 +75,25 @@ public class User extends AbstractEntity{
         this.password = password;
     }
 
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return id == user.id && Objects.equals(email, user.email) && role == user.role && Objects.equals(firstname, user.firstname) && Objects.equals(lastname, user.lastname) && Objects.equals(userName, user.userName) && Objects.equals(password, user.password);
+        return id == user.id && Objects.equals(email, user.email) && role == user.role && Objects.equals(firstname, user.firstname) && Objects.equals(lastname, user.lastname) && Objects.equals(userName, user.userName) && Objects.equals(password, user.password) && status == user.status;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, email, role, firstname, lastname, userName, password);
+        return Objects.hash(id, email, role, firstname, lastname, userName, password, status);
     }
 
     @Override
@@ -96,6 +106,7 @@ public class User extends AbstractEntity{
                 ", lastname='" + lastname + '\'' +
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
+                ", status=" + status +
                 '}';
     }
 }

@@ -5,7 +5,10 @@
       <map>
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/jsp/authenticate/login.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/jsp/authenticate" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/jsp/main.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/jsp" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/index.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/pages/jsp/authenticate/login.jsp" value="file://$PROJECT_DIR$/src/main/webapp/pages/jsp/authenticate" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/pages/jsp/main/admin/admin_page.jsp" value="file://$PROJECT_DIR$/src/main/webapp/pages/jsp/main/admin" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/ui/footer.html" value="file://$PROJECT_DIR$/src/main/webapp/ui" />
       </map>
     </option>
   </component>

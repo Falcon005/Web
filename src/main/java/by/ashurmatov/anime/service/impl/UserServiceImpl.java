@@ -1,5 +1,6 @@
 package by.ashurmatov.anime.service.impl;
 
+import by.ashurmatov.anime.entity.type.Status;
 import by.ashurmatov.anime.exception.DaoException;
 import by.ashurmatov.anime.exception.ServiceException;
 import by.ashurmatov.anime.dao.impl.UserDaoImpl;
@@ -92,6 +93,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Status findUserStatus(String login) throws ServiceException {
+        try {
+            return userDao.findUserStatus(login);
+        }catch (DaoException e) {
+            logger.error("Error in find User Role By Login");
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
     public List<User> findUsersByRole(UserRole userRole) throws ServiceException {
         try {
             return userDao.findUsersByRole(userRole);
@@ -107,6 +118,15 @@ public class UserServiceImpl implements UserService {
             return userDao.deleteByLogin(login);
         }catch (DaoException e) {
             logger.error("Error in deleting User By Login " + e);
+            throw new ServiceException(e);
+        }
+    }
+    @Override
+    public boolean deleteSoThatToChangeStatusToBlocked(String login) throws ServiceException {
+        try {
+            return userDao.deleteSoThatToChangeStatusToBlocked(login);
+        }catch (DaoException e) {
+            logger.error("Error in change status to BLOCKED " + e);
             throw new ServiceException(e);
         }
     }

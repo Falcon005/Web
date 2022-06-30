@@ -3,6 +3,7 @@ package by.ashurmatov.anime.dao.mapper.impl;
 import by.ashurmatov.anime.dao.mapper.EntityMapper;
 import by.ashurmatov.anime.dao.mapper.ColumnName;
 import by.ashurmatov.anime.entity.User;
+import by.ashurmatov.anime.entity.type.Status;
 import by.ashurmatov.anime.entity.type.UserRole;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -24,6 +25,7 @@ public class UserMapper implements EntityMapper<User> {
             user.setLastname(resultSet.getString(ColumnName.LASTNAME));
             user.setUserName(resultSet.getString(ColumnName.USERNAME));
             user.setPassword(resultSet.getString(ColumnName.PASSWORD));
+            user.setStatus(Status.valueOf(resultSet.getString(ColumnName.STATUS).toUpperCase()));
 
             return Optional.of(user);
         }catch (SQLException sqlException) {

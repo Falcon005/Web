@@ -19,6 +19,7 @@ public final class ParameterName {
     public static final String UNAVAILABLE_EMAIL_ADDRESS = "unavailable_email_address";
     public static final String UNAVAILABLE_LOGIN = "unavailable_login";
     public static final String ERROR_IN_VALIDATION = "error_in_validation";
+    public static final String ERROR_IN_BLOCKING = "error_in_blocking";
 
 
 

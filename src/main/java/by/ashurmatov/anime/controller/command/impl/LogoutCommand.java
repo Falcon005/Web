@@ -18,7 +18,7 @@ public class LogoutCommand implements Command {
             session.invalidate();
             logger.info("Session is destroyed in Logout Command");
         }
-        return new Router(PagePath.INDEX_PAGE,Router.Type.FORWARD);
+        return new Router(PagePath.INDEX_PAGE,Router.Type.REDIRECT);
 
     }
 }

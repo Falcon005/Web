@@ -1,5 +1,6 @@
 package by.ashurmatov.anime.dao;
 
+import by.ashurmatov.anime.entity.type.Status;
 import by.ashurmatov.anime.exception.DaoException;
 import by.ashurmatov.anime.entity.AbstractEntity;
 import by.ashurmatov.anime.entity.User;
@@ -14,14 +15,15 @@ public interface BaseDao<T extends AbstractEntity>{
     List<T> findAll() throws DaoException;
     Optional<T> findById(Long id) throws DaoException;
 
-    Optional<T> findByLogin(String login) throws DaoException;
-    UserRole findUserRole(String login) throws DaoException;
-    List<T> findUsersByRole(UserRole userRole) throws DaoException;
-    boolean deleteByLogin(String login) throws DaoException;
-    boolean updateUser(User user) throws DaoException;
-    boolean updatePassword(String login, String newPassword) throws DaoException;
-    boolean isLoginAvailable(String login) throws DaoException;
-    boolean isEmailAvailable(String email) throws DaoException;
+//    Optional<T> findByLogin(String login) throws DaoException;
+//    UserRole findUserRole(String login) throws DaoException;
+//    Status findUserStatus(String login) throws DaoException;
+//    List<T> findUsersByRole(UserRole userRole) throws DaoException;
+//    boolean deleteByLogin(String login) throws DaoException;
+//    boolean updateUser(User user) throws DaoException;
+//    boolean updatePassword(String login, String newPassword) throws DaoException;
+//    boolean isLoginAvailable(String login) throws DaoException;
+//    boolean isEmailAvailable(String email) throws DaoException;
 
 
 }

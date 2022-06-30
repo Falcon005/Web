@@ -8,6 +8,7 @@ public class SessionAttributeName {
     public static final String USERNAME = "username";
     public static final String PASSWORD = "password";
     public static final String CURRENT_PAGE = "currentPage";
+    public static final String USER_STATUS = "UserStatus";
 
     private SessionAttributeName () {
 
