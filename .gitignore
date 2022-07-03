@@ -40,3 +40,7 @@ build/
 
 /.idea/
 /.mvn/
+Web.iml
+pom.xml
+mvnw.cmd
+
