@@ -41,20 +41,24 @@
             <div class="collapse navbar-collapse" id="navbarScroll">
                 <ul class="navbar-nav navbar-nav-scroll w-50 justify-content-evenly">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="">Home</a>
+<%--                        <a class="nav-link active" aria-current="page" href="">Home</a>--%>
+                        <form class="nav-link" action="${pageContext.request.contextPath}/controller.do">
+                            <input type="hidden" name="command" value="home_all_anime"/>
+                            <input type="submit" value="Home"/>
+                        </form>
                     </li>
                     <li class="nav-item">
 <%--                        <a class="nav-link" href="${pageContext.request.contextPath}/pages/jsp/main/admin/users/users.jsp">Users</a>--%>
                         <form class="nav-link" action="${pageContext.request.contextPath}/controller.do">
-                            <input type="hidden" name="command" value="admin_users">
-                            <input type="submit" value="Users">
+                            <input type="hidden" name="command" value="admin_users"/>
+                            <input type="submit" value="Users"/>
                         </form>
                     </li>
                     <li class="nav-item">
 <%--                        <a class="nav-link" href="${pageContext.request.contextPath}/pages/jsp/main/admin/movies/anime.jsp">Movies Control</a>--%>
                         <form class="nav-link" action="${pageContext.request.contextPath}/controller.do">
-                            <input type="hidden" name="command" value="admin_all_anime">
-                            <input type="submit" value="Movies">
+                            <input type="hidden" name="command" value="admin_all_anime"/>
+                            <input type="submit" value="Movies"/>
                         </form>
                     </li>
                     <li class="nav-item dropdown">

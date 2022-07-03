@@ -90,7 +90,22 @@ body {
     object-fit: cover;
 }
 
+.card-image .card-image-content {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    max-height: 250px;
+}
 
+.card-image .card-image-btn {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    overflow: hidden;
+    max-height: 250px;
+}
 
 
 .table thead th:not(:last-child) {

@@ -10,6 +10,7 @@ public final class PagePath {
     public static final String MOVIES_PAGE = "/pages/jsp/main/admin/movies/anime.jsp";
     public static final String ADD_PAGE = "/pages/jsp/main/admin/movies/add_anime/add.jsp";
     public static final String EDIT_PAGE = "/pages/jsp/main/admin/movies/edit_anime/edit.jsp";
+    public static final String HOME_MOVIES_PAGE = "/pages/jsp/main/admin/movies/home_anime.jsp";
 
 
     private PagePath(){

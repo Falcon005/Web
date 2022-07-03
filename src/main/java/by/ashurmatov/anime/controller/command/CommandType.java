@@ -17,6 +17,7 @@ public enum CommandType {
     USER_BLOCK(new UserBlockCommand()),
     USER_ACTIVATE(new UserActivateCommand()),
     FIND_ANIME_TO_UPDATE(new FindAnimeToUpdate()),
+    HOME_ALL_ANIME(new HomeAllAnimeCommand()),
     DEFAULT_COMMAND(new DefaultCommand());
 
     Command command;
