@@ -21,5 +21,6 @@ public interface UserService extends BaseService<User>{
     boolean isLoginAvailable(String login) throws ServiceException;
     boolean isEmailAvailable(String email) throws ServiceException;
     boolean deleteSoThatToChangeStatusToBlocked(String login) throws ServiceException;
+    boolean activateSoThatToChangeStatusToActivated(String login) throws ServiceException;
 
 }

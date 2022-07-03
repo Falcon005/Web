@@ -9,14 +9,13 @@ import by.ashurmatov.anime.exception.ServiceException;
 import by.ashurmatov.anime.service.UserService;
 import by.ashurmatov.anime.service.impl.UserServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Optional;
 
-public class UserBlockCommand implements Command {
-    private static final Logger logger = LogManager.getLogger(UserBlockCommand.class);
+public class UserActivateCommand implements Command {
+    private static final Logger logger = LogManager.getLogger(UserActivateCommand.class);
     @Override
     public Router execute(HttpServletRequest request) throws CommandException{
         Router router = null;
@@ -29,21 +28,22 @@ public class UserBlockCommand implements Command {
             if (optionalUser.isPresent()) {
                 userToString = optionalUser.get().toString();
             }
-            if (userService.deleteSoThatToChangeStatusToBlocked(username)) {
-                logger.info("User which username is "+username+" successfully blocked ");
+            if (userService.activateSoThatToChangeStatusToActivated(username)) {
+                logger.info("User which username is "+username+" successfully activated ");
                 router = new AdminUsersCommand().execute(request);
                 logger.info("Router is " + router + " in If ");
-                request.setAttribute(ParameterName.USER_BLOCKED,userToString);
+                request.setAttribute(ParameterName.USER_ACTIVATED,userToString);
 
             }else {
                 logger.info("User which username is "+username+" not blocked ");
-                request.setAttribute(ParameterName.USER_NOT_BLOCKED,ParameterName.USER_NOT_BLOCKED);
+                request.setAttribute(ParameterName.USER_NOT_ACTIVATED,ParameterName.USER_NOT_ACTIVATED);
             }
         }catch (ServiceException serviceException) {
-            logger.error("Error in blocking User " + username + serviceException);
+            logger.error("Error in activating User " + username + serviceException);
             throw new CommandException(serviceException);
         }
         logger.info("Router is " + router);
         return router;
+
     }
 }

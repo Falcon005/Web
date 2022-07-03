@@ -29,7 +29,7 @@ public class UserMapper implements EntityMapper<User> {
 
             return Optional.of(user);
         }catch (SQLException sqlException) {
-            logger.error("error in mapping resultSet into an object (User)", sqlException);
+            logger.error("Error in mapping resultSet into an object (User)", sqlException);
         }
         return Optional.empty();
     }

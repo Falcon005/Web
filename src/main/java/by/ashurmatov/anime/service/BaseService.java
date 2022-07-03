@@ -14,14 +14,4 @@ public interface BaseService<T> {
     List<T> findAll() throws ServiceException;
     Optional<T> findById(Long id) throws ServiceException;
 
-//    Optional<T> findByLogin(String login) throws ServiceException;
-//    UserRole findUserRole(String login) throws ServiceException;
-//    List<T> findUsersByRole(UserRole userRole) throws ServiceException;
-//    boolean deleteByLogin(String login) throws ServiceException;
-//    boolean updateUser(User user) throws ServiceException;
-//    boolean updatePassword(String login, String newPassword) throws ServiceException;
-//    boolean isLoginAvailable(String login) throws ServiceException;
-//    boolean isEmailAvailable(String email) throws ServiceException;
-
-
 }

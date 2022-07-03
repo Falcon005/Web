@@ -12,11 +12,11 @@ public enum CommandType {
     HOME(new HomeCommand()),
     LOGIN(new LoginCommand()),
     LOGOUT(new LogoutCommand()),
-    USER_DELETE(new UserDeleteCommand()),
     RATING(new RatingCommand()),
     REGISTER(new RegisterCommand()),
     USER_BLOCK(new UserBlockCommand()),
-    USER_UNBLOCK(new UserUnblockCommand()),
+    USER_ACTIVATE(new UserActivateCommand()),
+    FIND_ANIME_TO_UPDATE(new FindAnimeToUpdate()),
     DEFAULT_COMMAND(new DefaultCommand());
 
     Command command;

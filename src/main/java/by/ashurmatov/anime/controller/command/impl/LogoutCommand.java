@@ -16,6 +16,9 @@ public class LogoutCommand implements Command {
         HttpSession session = request.getSession();
         if (!session.isNew()) {
             session.invalidate();
+//            response.setHeader("Cache-Control","no-cache");
+//            response.setHeader("Cache-Control","no-store");
+//            response.setDateHeader("Expires", 0);
             logger.info("Session is destroyed in Logout Command");
         }
         return new Router(PagePath.INDEX_PAGE,Router.Type.REDIRECT);

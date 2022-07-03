@@ -24,5 +24,6 @@ public class UserQuery {
     public static final String UPDATE_PASSWORD = "UPDATE users SET password = ? WHERE username = ?";
     public static final String DELETE_BY_LOGIN = "DELETE FROM users WHERE username = ?";
     public static final String DELETE_SO_THAT_TO_CHANGE_STATUS_TO_BLOCKED = "UPDATE users SET status = 'BLOCKED' WHERE username = ?";
+    public static final String ACTIVATE_SO_THAT_TO_CHANGE_STATUS_TO_ACTIVATED = "UPDATE users SET status = 'ACTIVE' WHERE username = ?";
 
 }

@@ -20,8 +20,9 @@ import java.util.List;
 import java.util.Optional;
 
 public class UserDaoImpl implements UserDao {
-    private final UserMapper userMapper = new UserMapper();
     private static final Logger logger=LogManager.getLogger(UserDaoImpl.class);
+    private final UserMapper userMapper = new UserMapper();
+
     private static final UserDaoImpl instance = new UserDaoImpl();
 
     public static UserDaoImpl getInstance() {
@@ -46,18 +47,18 @@ public class UserDaoImpl implements UserDao {
             statement.setString(7,user.getStatus().toString());
             int count = statement.executeUpdate();
             return count == 1;
-        } catch (SQLException e) {
-            logger.error("Error in inserting User in Database");
-            throw new DaoException("Error in saving user " + UserQuery.INSERT_USER_QUERY,e);
+        } catch (SQLException sqlException) {
+            logger.error("Error in inserting User into Database");
+            throw new DaoException("Error in saving user " + UserQuery.INSERT_USER_QUERY,sqlException);
         }
 
     }
 
     @Override
-    public boolean delete(Long Id) throws DaoException{
+    public boolean delete(Long id) throws DaoException{
         try (Connection connection = DynamicConnectionPool.getInstance().provideConnection();
             PreparedStatement statement = connection.prepareStatement(UserQuery.DELETE_USER_BY_ID)) {
-            statement.setLong(1, Id);
+            statement.setLong(1, id);
             int count = statement.executeUpdate();
             return count == 1;
         }catch (SQLException sqlException) {
@@ -205,6 +206,19 @@ public class UserDaoImpl implements UserDao {
             return count == 1;
         }catch (SQLException sqlException) {
             logger.error("Error in changing status to BLOCKED " + sqlException);
+            throw new DaoException(sqlException);
+        }
+    }
+
+    @Override
+    public boolean activateSoThatToChangeStatusToActivated(String login) throws DaoException {
+        try(Connection connection = DynamicConnectionPool.getInstance().provideConnection();
+            PreparedStatement statement = connection.prepareStatement(UserQuery.ACTIVATE_SO_THAT_TO_CHANGE_STATUS_TO_ACTIVATED)) {
+            statement.setString(1,login);
+            int count  = statement.executeUpdate();
+            return count == 1;
+        }catch (SQLException sqlException) {
+            logger.error("Error in changing status to ACTIVATED " + sqlException);
             throw new DaoException(sqlException);
         }
     }

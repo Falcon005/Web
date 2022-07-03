@@ -20,4 +20,5 @@ public interface UserDao extends BaseDao<User>{
     boolean isLoginAvailable(String login) throws DaoException;
     boolean isEmailAvailable(String email) throws DaoException;
     boolean deleteSoThatToChangeStatusToBlocked(String login) throws DaoException;
+    boolean activateSoThatToChangeStatusToActivated(String login) throws DaoException;
 }

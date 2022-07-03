@@ -8,6 +8,9 @@
         <entry key="file://$PROJECT_DIR$/src/main/webapp/index.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/pages/jsp/authenticate/login.jsp" value="file://$PROJECT_DIR$/src/main/webapp/pages/jsp/authenticate" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/pages/jsp/main/admin/admin_page.jsp" value="file://$PROJECT_DIR$/src/main/webapp/pages/jsp/main/admin" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/pages/jsp/main/admin/movies/add_anime/add.jsp" value="file://$PROJECT_DIR$/src/main/webapp/pages/jsp/main/admin/movies/add_anime" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/pages/jsp/main/admin/users/add/add_user.jsp" value="file://$PROJECT_DIR$/src/main/webapp/pages/jsp/main/admin/users/add" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/pages/jsp/main/admin/users/users.jsp" value="file://$PROJECT_DIR$/src/main/webapp/pages/jsp/main/admin/users" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/ui/footer.html" value="file://$PROJECT_DIR$/src/main/webapp/ui" />
       </map>
     </option>

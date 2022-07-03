@@ -132,6 +132,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public boolean activateSoThatToChangeStatusToActivated(String login) throws ServiceException {
+        try {
+            return userDao.activateSoThatToChangeStatusToActivated(login);
+        }catch (DaoException e) {
+            logger.error("Error in change status to ACTIVATED");
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
     public boolean updateUser(User user) throws ServiceException {
         try {
             return userDao.updateUser(user);
