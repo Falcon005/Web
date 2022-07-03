@@ -1,5 +1,5 @@
 target/
-!.mvn/wrapper/maven-wrapper.jar
+.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
 
@@ -11,6 +11,10 @@ target/
 *.iws
 *.iml
 *.ipr
+mvnw.cmd
+pom.xml
+Web.iml
+.gitignore
 
 ### Eclipse ###
 .apt_generated
@@ -37,4 +41,3 @@ build/
 ### Mac OS ###
 .DS_Store
 
-.idea/
