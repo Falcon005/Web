@@ -83,7 +83,8 @@
         <div class="row anime-data">
             <div class="col-3">
                 <div class="row">
-                    <img src="${pageContext.request.contextPath}/img/<jsp:getProperty name="temporary_anime" property="image_path"/>" class="card-img-top rounded anime-image" alt="anime-image">
+<%--                    <img src="${pageContext.request.contextPath}/img/<jsp:getProperty name="temporary_anime" property="image_path"/>" class="card-img-top rounded anime-image" alt="anime-image">--%>
+                    <img src="<jsp:getProperty name="temporary_anime" property="image_path"/>" class="card-img-top rounded anime-image" alt="anime-image">
                     <div class="anime-rate-comment">
                         <button>Rate & Comment</button>
                     </div>

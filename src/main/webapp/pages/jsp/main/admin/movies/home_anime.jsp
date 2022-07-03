@@ -91,7 +91,8 @@
                             <form action="${pageContext.request.contextPath}/controller.do" class="card-image-content">
                                 <input type="hidden" name="command" value="one_page_for_all_anime"/>
                                 <button type="submit" value="${tempAnime.id}" name="id" class="card-image-btn">
-                                    <img src="${pageContext.request.contextPath}/img/${tempAnime.image_path}" class="card-img-top rounded" alt="anime-image">
+<%--                                    <img src="${pageContext.request.contextPath}/img/${tempAnime.image_path}" class="card-img-top rounded" alt="anime-image">--%>
+                                    <img src="${tempAnime.image_path}" class="card-img-top rounded" alt="anime-image"/>
                                 </button>
                             </form>
                         </div>
