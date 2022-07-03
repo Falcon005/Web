@@ -11,10 +11,7 @@ target/
 *.iws
 *.iml
 *.ipr
-mvnw.cmd
-pom.xml
-Web.iml
-.gitignore
+
 
 ### Eclipse ###
 .apt_generated
