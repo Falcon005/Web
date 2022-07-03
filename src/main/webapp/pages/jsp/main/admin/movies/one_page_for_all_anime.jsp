@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: ashurmatovlochinbek
-  Date: 30/06/22
-  Time: 11:05 AM
+  Date: 03/07/22
+  Time: 5:21 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -17,7 +17,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js" integrity="sha512-6PM0qYu5KExuNcKt5bURAoT6KCThUmHRewN3zUFNaoI6Di7XJPTMoT6K0nsagZKk2OB4L7E3q1uQKHNHd4stIQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <title>Anime table page</title>
+    <title>Id Page</title>
+    <jsp:useBean id="temporary_anime" scope="request" type="by.ashurmatov.anime.entity.Anime"/>
 </head>
 <body>
 
@@ -31,21 +32,18 @@
             <div class="collapse navbar-collapse" id="navbarScroll">
                 <ul class="navbar-nav navbar-nav-scroll w-50 justify-content-evenly">
                     <li class="nav-item">
-<%--                        <a class="nav-link active" aria-current="page" href="${pageContext.request.contextPath}/pages/jsp/main/admin/admin_page.jsp">Home</a>--%>
                         <form class="nav-link" action="${pageContext.request.contextPath}/controller.do">
                             <input type="hidden" name="command" value="home_all_anime"/>
                             <input type="submit" value="Home"/>
                         </form>
                     </li>
                     <li class="nav-item">
-<%--                        <a class="nav-link" href="../users/users.html">Users</a>--%>
                         <form class="nav-link" action="${pageContext.request.contextPath}/controller.do">
                             <input type="hidden" name="command" value="admin_users">
                             <input type="submit" value="Users">
                         </form>
                     </li>
                     <li class="nav-item">
-<%--                        <a class="nav-link" href="#">Movies Control</a>--%>
                         <form class="nav-link" action="${pageContext.request.contextPath}/controller.do">
                             <input type="hidden" name="command" value="admin_all_anime">
                             <input type="submit" value="Movies">
@@ -67,9 +65,6 @@
                 <a class="user-profile text-dark bg-light text-decoration-none p-2 rounded-circle">
                     <i class="fa-regular fa-user"></i>
                 </a>
-<%--                <a class="login text-decoration-underline text-light p-2 me-1" href="../../login/login.html">Login</a>or--%>
-<%--                <a class="sign-up text-decoration-none bg-warning p-2 rounded text-secondary ms-1" href="../../registration/registration.html">Sign Up</a>--%>
-<%--                <a class="logout text-decoration-underline text-light p-2 ms-1" href="">Logout</a>--%>
                 <form action="${pageContext.request.contextPath}/controller.do" class="logout text-decoration-underline text-light p-2 ms-1">
                     <input type="hidden" name="command" value="logout">
                     <input type="submit" value="logout">
@@ -79,82 +74,54 @@
     </nav>
 </section>
 
-<section class="main-wrapper py-4">
+<section class="anime-wrapper py-5">
+    <div class="container">
 
-    <div class="container mb-3">
-        <div class="row justify-content-between">
-            <div class="col-6 d-flex align-items-center">
-                <input type="text" class="form-control" id="inputSearch" placeholder="Search">
-                <button class="btn btn-primary ms-2 d-flex align-items-center">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                    <span class="ms-2">Search</span>
-                </button>
-            </div>
+        <div class="row anime-title">
+            <h4 title="<jsp:getProperty name="temporary_anime" property="name"/>"><jsp:getProperty name="temporary_anime" property="name"/></h4>
+        </div>
+        <div class="row anime-data">
             <div class="col-3">
-                <form action="${pageContext.request.contextPath}/pages/jsp/main/admin/movies/add_anime/add.jsp">
-                    <button type="submit" class="btn btn-success ms-2 d-flex align-items-center float-end">
-                        <i class="fa-solid fa-plus"></i>
-                        <span class="ms-2">Add Movie</span>
-                    </button>
-                </form>
+                <div class="row">
+                    <img src="${pageContext.request.contextPath}/img/<jsp:getProperty name="temporary_anime" property="image_path"/>" class="card-img-top rounded anime-image" alt="anime-image">
+                    <div class="anime-rate-comment">
+                        <button>Rate & Comment</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-5 anime-details">
+                <div class="row flex-column">
+                    <div class="col d-flex">
+                        <div class="anime-detail-type">Country:</div>
+                        <div class="anime-detail-value"><jsp:getProperty name="temporary_anime" property="country"/></div>
+                    </div>
+                    <div class="col d-flex">
+                        <div class="anime-detail-type">Created year:</div>
+                        <div class="anime-detail-value"><jsp:getProperty name="temporary_anime" property="createdYear"/></div>
+                    </div>
+                    <div class="col d-flex">
+                        <div class="anime-detail-type">Genre:</div>
+                        <div class="anime-detail-value"><jsp:getProperty name="temporary_anime" property="genre"/></div>
+                    </div>
+                    <div class="col d-flex">
+                        <div class="anime-detail-type">Age rating:</div>
+                        <div class="anime-detail-value"><jsp:getProperty name="temporary_anime" property="ageLimit"/></div>
+                    </div>
+                    <div class="col d-flex">
+                        <div class="anime-detail-type">Rate:</div>
+                        <div class="anime-detail-value">8.9</div>
+                    </div>
+
+                </div>
             </div>
         </div>
-    </div>
-
-    <div class="container">
-        <table class="table table-bordered border-primary table-hover">
-            <thead class="bg-primary text-light">
-            <tr>
-                <th scope="col">id</th>
-                <th scope="col">Name</th>
-                <th scope="col">Country</th>
-                <th scope="col">Created Year</th>
-                <th scope="col">Genre</th>
-                <th scope="col">Age Limit</th>
-                <th scope="col">Description</th>
-                <th scope="col">Image Path</th>
-                <th scope="col" class="table-actions">Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-            <jsp:useBean id="anime_list" scope="request" type="java.util.List"/>
-            <c:forEach var="tempAnime" items="${anime_list}">
-                <tr>
-                    <td>${tempAnime.id}</td>
-                    <td>${tempAnime.name}</td>
-                    <td>${tempAnime.country}</td>
-                    <td>${tempAnime.createdYear}</td>
-                    <td>${tempAnime.genre}</td>
-                    <td>${tempAnime.ageLimit}</td>
-                    <td>${tempAnime.description}</td>
-                    <td>${tempAnime.image_path}</td>
-                    <td class="table-actions">
-                        <div>
-                            <form action="${pageContext.request.contextPath}/controller.do">
-                                <input type="hidden" name="command" value="find_anime_to_update"/>
-                                <button type="submit" value="${tempAnime.id}" name="id" class="btn btn-outline-success">
-                                    <i class="fa-regular fa-pen-to-square"></i>
-                                    Edit
-                                </button>
-                            </form>
-
-                            <form action="${pageContext.request.contextPath}/controller.do">
-                                <input type="hidden" name="command" value="anime_delete"/>
-                                <button type="submit" value="${tempAnime.id}" name="id" class="btn btn-outline-danger">
-                                    <i class="fa-regular fa-trash-can"></i>
-                                    Delete
-                                </button>
-                            </form>
-                        </div>
-
-                    </td>
-                </tr>
-            </c:forEach>
-            </tbody>
-            <!-- <tfoot>
-
-            </tfoot> -->
-        </table>
+        <div class="row anime-description">
+            <strong>Description:</strong>
+            <p>
+                <jsp:getProperty name="temporary_anime" property="description"/>
+            </p>
+        </div>
+        <div class="row anime-comments"></div>
     </div>
 </section>
 

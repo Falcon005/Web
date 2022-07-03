@@ -37,6 +37,7 @@ public class AnimeDaoImpl implements AnimeDao {
             statement.setString(4,anime.getGenre());
             statement.setInt(5,anime.getAgeLimit());
             statement.setString(6,anime.getDescription());
+            statement.setString(7,anime.getImage_path());
             int count = statement.executeUpdate();
             return count == 1;
         }catch (SQLException sqlException) {
@@ -106,7 +107,8 @@ public class AnimeDaoImpl implements AnimeDao {
             statement.setString(4,anime.getGenre());
             statement.setInt(5,anime.getAgeLimit());
             statement.setString(6,anime.getDescription());
-            statement.setLong(7,id);
+            statement.setString(7,anime.getImage_path());
+            statement.setLong(8,id);
             int count = statement.executeUpdate();
             return  count == 1;
         }catch (SQLException sqlException) {

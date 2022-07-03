@@ -108,6 +108,10 @@
             <%--            <input type="text" class="form-control" id="inputDescription" placeholder="Description">--%>
             <textarea rows="5" cols="50" id="inputDescription" class="form-control" name="description"></textarea>
         </div>
+        <div class="col-12 mb-2">
+            <label for="inputImagePath" class="form-label">Image path</label>
+            <input type="text" name="imagePath" class="form-control" id="inputImagePath" placeholder="Image Path">
+        </div>
         <div class="col-12 my-2 text-center">
             <button type="submit" class="btn btn-primary">Edit</button>
         </div>

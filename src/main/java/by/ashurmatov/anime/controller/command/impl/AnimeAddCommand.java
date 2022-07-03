@@ -26,6 +26,7 @@ public class AnimeAddCommand implements Command {
         String genre = request.getParameter(ParameterName.GENRE);
         String ageLimitString = request.getParameter(ParameterName.AGE_LIMIT);
         String description = request.getParameter(ParameterName.DESCRIPTION);
+        String imagePath = request.getParameter(ParameterName.IMAGE_PATH);
 
 
 
@@ -35,15 +36,16 @@ public class AnimeAddCommand implements Command {
         logger.info("Genre of anime:   " + genre);
         logger.info("Age limit : " + ageLimitString);
         logger.info("Description of anime: " + description);
+        logger.info("Image path of picture of anime " + imagePath);
 
-        if (!AnimeValidator.validateInput(animeName,country,createdYearString,genre,ageLimitString,description)) {
+        if (!AnimeValidator.validateInput(animeName,country,createdYearString,genre,ageLimitString,description,imagePath)) {
             logger.error("Invalid input");
             router = new Router(PagePath.ADD_PAGE,Router.Type.FORWARD);
             return router;
         }
         int createdYear = Integer.parseInt(createdYearString);
         int ageLimit = Integer.parseInt(ageLimitString);
-        boolean isValidated = AnimeValidator.validateAnime(animeName,country,createdYear,genre,ageLimit,description);
+        boolean isValidated = AnimeValidator.validateAnime(animeName,country,createdYear,genre,ageLimit,description,imagePath);
 
         try {
             if (isValidated) {
@@ -55,6 +57,7 @@ public class AnimeAddCommand implements Command {
                     anime.setGenre(genre);
                     anime.setAgeLimit(ageLimit);
                     anime.setDescription(description);
+                    anime.setImage_path(imagePath);
 
                     if (animeService.register(anime)) {
                         router = new AdminAllAnimeCommand().execute(request);

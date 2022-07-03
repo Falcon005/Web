@@ -25,6 +25,7 @@ public class ColumnName {
     public static final String GENRE = "genre";
     public static final String AGE_LIMIT = "agelimit";
     public static final String DESCRIPTION = "description";
+    public static final String IMAGE_PATH = "image_path";
 
     /*
     Attachment table

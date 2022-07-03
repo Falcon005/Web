@@ -31,26 +31,13 @@
             <div class="collapse navbar-collapse" id="navbarScroll">
                 <ul class="navbar-nav navbar-nav-scroll w-50 justify-content-evenly">
                     <li class="nav-item">
-<%--                        <a class="nav-link active" aria-current="page" href="${pageContext.request.contextPath}/pages/jsp/main/admin/admin_page.jsp">Home</a>--%>
+                        <%--                        <a class="nav-link active" aria-current="page" href="${pageContext.request.contextPath}/pages/jsp/main/admin/admin_page.jsp">Home</a>--%>
                         <form class="nav-link" action="${pageContext.request.contextPath}/controller.do">
-                            <input type="hidden" name="command" value="home_all_anime"/>
+                            <input type="hidden" name="command" value="home_all_anime_for_user"/>
                             <input type="submit" value="Home"/>
                         </form>
                     </li>
-                    <li class="nav-item">
-                        <%--                        <a class="nav-link" href="../users/users.html">Users</a>--%>
-                        <form class="nav-link" action="${pageContext.request.contextPath}/controller.do">
-                            <input type="hidden" name="command" value="admin_users">
-                            <input type="submit" value="Users">
-                        </form>
-                    </li>
-                    <li class="nav-item">
-                        <%--                        <a class="nav-link" href="#">Movies Control</a>--%>
-                        <form class="nav-link" action="${pageContext.request.contextPath}/controller.do">
-                            <input type="hidden" name="command" value="admin_all_anime">
-                            <input type="submit" value="Movies">
-                        </form>
-                    </li>
+
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
                             Language
@@ -67,9 +54,6 @@
                 <a class="user-profile text-dark bg-light text-decoration-none p-2 rounded-circle">
                     <i class="fa-regular fa-user"></i>
                 </a>
-                <%--                <a class="login text-decoration-underline text-light p-2 me-1" href="../../login/login.html">Login</a>or--%>
-                <%--                <a class="sign-up text-decoration-none bg-warning p-2 rounded text-secondary ms-1" href="../../registration/registration.html">Sign Up</a>--%>
-                <%--                <a class="logout text-decoration-underline text-light p-2 ms-1" href="">Logout</a>--%>
                 <form action="${pageContext.request.contextPath}/controller.do" class="logout text-decoration-underline text-light p-2 ms-1">
                     <input type="hidden" name="command" value="logout">
                     <input type="submit" value="logout">

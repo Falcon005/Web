@@ -10,31 +10,24 @@ import by.ashurmatov.anime.exception.ServiceException;
 import by.ashurmatov.anime.service.AnimeService;
 import by.ashurmatov.anime.service.impl.AnimeServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.Optional;
+import java.util.List;
 
-public class FindAnimeToUpdate implements Command {
-    private static final Logger logger = LogManager.getLogger(FindAnimeToUpdate.class);
+public class HomeAllAnimeForUserCommand implements Command {
+    private static final Logger logger = LogManager.getLogger(HomeAllAnimeForUserCommand.class);
     @Override
     public Router execute(HttpServletRequest request) throws CommandException {
-        HttpSession session = request.getSession();
         AnimeService animeService = AnimeServiceImpl.getInstance();
-        Anime toUpdate;
-        long id = Long.parseLong(request.getParameter(ParameterName.ANIME_ID));
+        Router router;
         try {
-            Optional<Anime> optionalAnime = animeService.findById(id);
-            if (optionalAnime.isEmpty()) {
-                throw new ServiceException("could not find the user with id number: " + id);
-            }
-            toUpdate = optionalAnime.get();
-            session.setAttribute(ParameterName.TEMPORARY_ANIME,toUpdate);
-            session.setAttribute(ParameterName.ANIME_ID,id);
-            return new Router(PagePath.EDIT_PAGE,Router.Type.FORWARD);
+            List<Anime> animeList = animeService.findAll();
+            request.setAttribute(ParameterName.ANIME_LIST,animeList);
+            router = new Router(PagePath.HOME_MOVIES_FOR_USER_PAGE,Router.Type.FORWARD);
+            return router;
         }catch (ServiceException serviceException) {
-            logger.error("Error in finding the anime by id  + " +  serviceException);
+            logger.error("Error in getting all the Anime from Database " + serviceException);
             throw new CommandException(serviceException);
         }
     }

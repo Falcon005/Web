@@ -28,6 +28,7 @@ public final class ParameterName {
     public static final String GENRE = "genre";
     public static final String AGE_LIMIT = "ageLimit";
     public static final String DESCRIPTION = "description";
+    public static final String IMAGE_PATH = "imagePath";
     public static final String ANIME_ID = "id";
     public static final String ANIME_DELETED = "anime_deleted";
     public static final String ANIME_NOT_DELETED = "anime_not_deleted";

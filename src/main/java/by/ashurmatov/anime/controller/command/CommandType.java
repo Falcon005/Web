@@ -18,6 +18,8 @@ public enum CommandType {
     USER_ACTIVATE(new UserActivateCommand()),
     FIND_ANIME_TO_UPDATE(new FindAnimeToUpdate()),
     HOME_ALL_ANIME(new HomeAllAnimeCommand()),
+    ONE_PAGE_FOR_ALL_ANIME(new OnePageForAllAnimeCommand()),
+    HOME_ALL_ANIME_FOR_USER(new HomeAllAnimeForUserCommand()),
     DEFAULT_COMMAND(new DefaultCommand());
 
     Command command;

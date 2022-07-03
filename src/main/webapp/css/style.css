@@ -1,15 +1,18 @@
 
 /*body {*/
-/*    background: url(../img/background/background_main.jpg) no-repeat center center fixed;*/
+/*    background: url(../img/background/anime_img.webp) no-repeat center center fixed;*/
 /*    -webkit-background-size: cover;*/
 /*    -moz-background-size: cover;*/
 /*    -o-background-size: cover;*/
 /*    background-size: cover;*/
+/*}*/
 
-/*}*/
-/*.admin{*/
-/*    text-align: center;*/
-/*}*/
+.anime-wrapper {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: auto;
+    -webkit-flex: 1 1 auto;
+}
 
 .btn-group button {
     cursor: pointer; /* Pointer/hand icon */
@@ -140,3 +143,4 @@ body {
 .nav-item dropdown {
     margin-top: 30px;
 }
+

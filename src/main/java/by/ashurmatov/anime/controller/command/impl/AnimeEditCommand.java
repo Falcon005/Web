@@ -42,6 +42,7 @@ public class AnimeEditCommand implements Command {
             String genre = request.getParameter(ParameterName.GENRE);
             String ageLimitString = request.getParameter(ParameterName.AGE_LIMIT);
             String description = request.getParameter(ParameterName.DESCRIPTION);
+            String imagePath = request.getParameter(ParameterName.IMAGE_PATH);
 
 
 
@@ -51,15 +52,16 @@ public class AnimeEditCommand implements Command {
             logger.info("Genre of anime:   " + genre);
             logger.info("Age limit : " + ageLimitString);
             logger.info("Description of anime: " + description);
+            logger.info("Image path of anime: " + imagePath);
 
-            if (!AnimeValidator.validateInput(animeName,country,createdYearString,genre,ageLimitString,description)) {
+            if (!AnimeValidator.validateInput(animeName,country,createdYearString,genre,ageLimitString,description,imagePath)) {
                 logger.error("Invalid input");
                 router = new Router(PagePath.EDIT_PAGE,Router.Type.FORWARD);
                 return router;
             }
             int createdYear = Integer.parseInt(createdYearString);
             int ageLimit = Integer.parseInt(ageLimitString);
-            boolean isValidated = AnimeValidator.validateAnime(animeName,country,createdYear,genre,ageLimit,description);
+            boolean isValidated = AnimeValidator.validateAnime(animeName,country,createdYear,genre,ageLimit,description,imagePath);
 
             if (isValidated) {
                 animeForUpdate.setName(animeName);
@@ -68,6 +70,7 @@ public class AnimeEditCommand implements Command {
                 animeForUpdate.setGenre(genre);
                 animeForUpdate.setAgeLimit(ageLimit);
                 animeForUpdate.setDescription(description);
+                animeForUpdate.setImage_path(imagePath);
 
                 if (animeService.editAnime(animeForUpdate, id)) {
                     router = new AdminAllAnimeCommand().execute(request);

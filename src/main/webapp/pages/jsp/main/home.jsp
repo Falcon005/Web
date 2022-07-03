@@ -38,14 +38,17 @@
 <section class="navbar-wrapper">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-5 py-2">
         <div class="container-fluid">
-            <a class="navbar-brand" href="">Anime Hub</a>
+            <a class="navbar-brand" href="#">Anime Hub</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarScroll">
                 <ul class="navbar-nav navbar-nav-scroll w-50 justify-content-evenly">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="">Home</a>
+                        <form class="nav-link" action="${pageContext.request.contextPath}/controller.do">
+                            <input type="hidden" name="command" value="home_all_anime_for_user"/>
+                            <input type="submit" value="Home"/>
+                        </form>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
@@ -79,158 +82,160 @@
     </nav>
 </section>
 
-<section class="main-wrapper">
-    <div class="container py-4">
+<h1>Welcome to User Page</h1>
 
-        <div class="row my-3">
+<%--<section class="main-wrapper">--%>
+<%--    <div class="container py-4">--%>
 
-            <div class="col-4">
-                <div class="card rounded bg-dark text-light mx-auto" style="width: 18rem;">
-                    <div class="card-image">
-                        <img src="${pageContext.request.contextPath}/img/Boruto.jpg" class="card-img-top rounded" alt="anime-image">
-                    </div>
-                    <div class="card-body pt-0">
-                        <h5 class="card-title" title="Боруто. Наруто: Следующее поколение">Боруто. Наруто: Следующее поколение</h5>
-                        <div class="card-details d-flex justify-content-between fs-5 text-muted">
-                            <div class="card-anime-type">Series</div>
-                            <div class="card-anime-date">07-05-2017</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<%--        <div class="row my-3">--%>
 
-            <div class="col-4">
-                <div class="card rounded bg-dark text-light mx-auto" style="width: 18rem;">
-                    <div class="card-image">
-                        <img src="${pageContext.request.contextPath}/img/Boruto.jpg" class="card-img-top rounded" alt="anime-image">
-                    </div>
-                    <div class="card-body pt-0">
-                        <h5 class="card-title" title="Боруто. Наруто: Следующее поколение">Боруто. Наруто: Следующее поколение</h5>
-                        <div class="card-details d-flex justify-content-between fs-5 text-muted">
-                            <div class="card-anime-type">Series</div>
-                            <div class="card-anime-date">07-05-2017</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<%--            <div class="col-4">--%>
+<%--                <div class="card rounded bg-dark text-light mx-auto" style="width: 18rem;">--%>
+<%--                    <div class="card-image">--%>
+<%--                        <img src="${pageContext.request.contextPath}/img/Boruto.jpg" class="card-img-top rounded" alt="anime-image">--%>
+<%--                    </div>--%>
+<%--                    <div class="card-body pt-0">--%>
+<%--                        <h5 class="card-title" title="Боруто. Наруто: Следующее поколение">Боруто. Наруто: Следующее поколение</h5>--%>
+<%--                        <div class="card-details d-flex justify-content-between fs-5 text-muted">--%>
+<%--                            <div class="card-anime-type">Series</div>--%>
+<%--                            <div class="card-anime-date">07-05-2017</div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
 
-            <div class="col-4">
-                <div class="card rounded bg-dark text-light mx-auto" style="width: 18rem;">
-                    <div class="card-image">
-                        <img src="${pageContext.request.contextPath}/img/Boruto.jpg" class="card-img-top rounded" alt="anime-image">
-                    </div>
-                    <div class="card-body pt-0">
-                        <h5 class="card-title" title="Боруто. Наруто: Следующее поколение">Боруто. Наруто: Следующее поколение</h5>
-                        <div class="card-details d-flex justify-content-between fs-5 text-muted">
-                            <div class="card-anime-type">Series</div>
-                            <div class="card-anime-date">07-05-2017</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<%--            <div class="col-4">--%>
+<%--                <div class="card rounded bg-dark text-light mx-auto" style="width: 18rem;">--%>
+<%--                    <div class="card-image">--%>
+<%--                        <img src="${pageContext.request.contextPath}/img/Boruto.jpg" class="card-img-top rounded" alt="anime-image">--%>
+<%--                    </div>--%>
+<%--                    <div class="card-body pt-0">--%>
+<%--                        <h5 class="card-title" title="Боруто. Наруто: Следующее поколение">Боруто. Наруто: Следующее поколение</h5>--%>
+<%--                        <div class="card-details d-flex justify-content-between fs-5 text-muted">--%>
+<%--                            <div class="card-anime-type">Series</div>--%>
+<%--                            <div class="card-anime-date">07-05-2017</div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
 
-        </div>
+<%--            <div class="col-4">--%>
+<%--                <div class="card rounded bg-dark text-light mx-auto" style="width: 18rem;">--%>
+<%--                    <div class="card-image">--%>
+<%--                        <img src="${pageContext.request.contextPath}/img/Boruto.jpg" class="card-img-top rounded" alt="anime-image">--%>
+<%--                    </div>--%>
+<%--                    <div class="card-body pt-0">--%>
+<%--                        <h5 class="card-title" title="Боруто. Наруто: Следующее поколение">Боруто. Наруто: Следующее поколение</h5>--%>
+<%--                        <div class="card-details d-flex justify-content-between fs-5 text-muted">--%>
+<%--                            <div class="card-anime-type">Series</div>--%>
+<%--                            <div class="card-anime-date">07-05-2017</div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
 
-        <div class="row my-3">
+<%--        </div>--%>
 
-            <div class="col-4">
-                <div class="card rounded bg-dark text-light mx-auto" style="width: 18rem;">
-                    <div class="card-image">
-                        <img src="${pageContext.request.contextPath}/img/Boruto.jpg" class="card-img-top rounded" alt="anime-image">
-                    </div>
-                    <div class="card-body pt-0">
-                        <h5 class="card-title" title="Боруто. Наруто: Следующее поколение">Боруто. Наруто: Следующее поколение</h5>
-                        <div class="card-details d-flex justify-content-between fs-5 text-muted">
-                            <div class="card-anime-type">Series</div>
-                            <div class="card-anime-date">07-05-2017</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<%--        <div class="row my-3">--%>
 
-            <div class="col-4">
-                <div class="card rounded bg-dark text-light mx-auto" style="width: 18rem;">
-                    <div class="card-image">
-                        <img src="${pageContext.request.contextPath}/img/Boruto.jpg" class="card-img-top rounded" alt="anime-image">
-                    </div>
-                    <div class="card-body pt-0">
-                        <h5 class="card-title" title="Боруто. Наруто: Следующее поколение">Боруто. Наруто: Следующее поколение</h5>
-                        <div class="card-details d-flex justify-content-between fs-5 text-muted">
-                            <div class="card-anime-type">Series</div>
-                            <div class="card-anime-date">07-05-2017</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<%--            <div class="col-4">--%>
+<%--                <div class="card rounded bg-dark text-light mx-auto" style="width: 18rem;">--%>
+<%--                    <div class="card-image">--%>
+<%--                        <img src="${pageContext.request.contextPath}/img/Boruto.jpg" class="card-img-top rounded" alt="anime-image">--%>
+<%--                    </div>--%>
+<%--                    <div class="card-body pt-0">--%>
+<%--                        <h5 class="card-title" title="Боруто. Наруто: Следующее поколение">Боруто. Наруто: Следующее поколение</h5>--%>
+<%--                        <div class="card-details d-flex justify-content-between fs-5 text-muted">--%>
+<%--                            <div class="card-anime-type">Series</div>--%>
+<%--                            <div class="card-anime-date">07-05-2017</div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
 
-            <div class="col-4">
-                <div class="card rounded bg-dark text-light mx-auto" style="width: 18rem;">
-                    <div class="card-image">
-                        <img src="${pageContext.request.contextPath}/img/Boruto.jpg" class="card-img-top rounded" alt="anime-image">
-                    </div>
-                    <div class="card-body pt-0">
-                        <h5 class="card-title" title="Боруто. Наруто: Следующее поколение">Боруто. Наруто: Следующее поколение</h5>
-                        <div class="card-details d-flex justify-content-between fs-5 text-muted">
-                            <div class="card-anime-type">Series</div>
-                            <div class="card-anime-date">07-05-2017</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<%--            <div class="col-4">--%>
+<%--                <div class="card rounded bg-dark text-light mx-auto" style="width: 18rem;">--%>
+<%--                    <div class="card-image">--%>
+<%--                        <img src="${pageContext.request.contextPath}/img/Boruto.jpg" class="card-img-top rounded" alt="anime-image">--%>
+<%--                    </div>--%>
+<%--                    <div class="card-body pt-0">--%>
+<%--                        <h5 class="card-title" title="Боруто. Наруто: Следующее поколение">Боруто. Наруто: Следующее поколение</h5>--%>
+<%--                        <div class="card-details d-flex justify-content-between fs-5 text-muted">--%>
+<%--                            <div class="card-anime-type">Series</div>--%>
+<%--                            <div class="card-anime-date">07-05-2017</div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
 
-        </div>
+<%--            <div class="col-4">--%>
+<%--                <div class="card rounded bg-dark text-light mx-auto" style="width: 18rem;">--%>
+<%--                    <div class="card-image">--%>
+<%--                        <img src="${pageContext.request.contextPath}/img/Boruto.jpg" class="card-img-top rounded" alt="anime-image">--%>
+<%--                    </div>--%>
+<%--                    <div class="card-body pt-0">--%>
+<%--                        <h5 class="card-title" title="Боруто. Наруто: Следующее поколение">Боруто. Наруто: Следующее поколение</h5>--%>
+<%--                        <div class="card-details d-flex justify-content-between fs-5 text-muted">--%>
+<%--                            <div class="card-anime-type">Series</div>--%>
+<%--                            <div class="card-anime-date">07-05-2017</div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
 
-        <div class="row my-3">
+<%--        </div>--%>
 
-            <div class="col-4">
-                <div class="card rounded bg-dark text-light mx-auto" style="width: 18rem;">
-                    <div class="card-image">
-                        <img src="${pageContext.request.contextPath}/img/Boruto.jpg" class="card-img-top rounded" alt="anime-image">
-                    </div>
-                    <div class="card-body pt-0">
-                        <h5 class="card-title" title="Боруто. Наруто: Следующее поколение">Боруто. Наруто: Следующее поколение</h5>
-                        <div class="card-details d-flex justify-content-between fs-5 text-muted">
-                            <div class="card-anime-type">Series</div>
-                            <div class="card-anime-date">07-05-2017</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<%--        <div class="row my-3">--%>
 
-            <div class="col-4">
-                <div class="card rounded bg-dark text-light mx-auto" style="width: 18rem;">
-                    <div class="card-image">
-                        <img src="${pageContext.request.contextPath}/img/Boruto.jpg" class="card-img-top rounded" alt="anime-image">
-                    </div>
-                    <div class="card-body pt-0">
-                        <h5 class="card-title" title="Боруто. Наруто: Следующее поколение">Боруто. Наруто: Следующее поколение</h5>
-                        <div class="card-details d-flex justify-content-between fs-5 text-muted">
-                            <div class="card-anime-type">Series</div>
-                            <div class="card-anime-date">07-05-2017</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<%--            <div class="col-4">--%>
+<%--                <div class="card rounded bg-dark text-light mx-auto" style="width: 18rem;">--%>
+<%--                    <div class="card-image">--%>
+<%--                        <img src="${pageContext.request.contextPath}/img/Boruto.jpg" class="card-img-top rounded" alt="anime-image">--%>
+<%--                    </div>--%>
+<%--                    <div class="card-body pt-0">--%>
+<%--                        <h5 class="card-title" title="Боруто. Наруто: Следующее поколение">Боруто. Наруто: Следующее поколение</h5>--%>
+<%--                        <div class="card-details d-flex justify-content-between fs-5 text-muted">--%>
+<%--                            <div class="card-anime-type">Series</div>--%>
+<%--                            <div class="card-anime-date">07-05-2017</div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
 
-            <div class="col-4">
-                <div class="card rounded bg-dark text-light mx-auto" style="width: 18rem;">
-                    <div class="card-image">
-                        <img src="${pageContext.request.contextPath}/img/Boruto.jpg" class="card-img-top rounded" alt="anime-image">
-                    </div>
-                    <div class="card-body pt-0">
-                        <h5 class="card-title" title="Боруто. Наруто: Следующее поколение">Боруто. Наруто: Следующее поколение</h5>
-                        <div class="card-details d-flex justify-content-between fs-5 text-muted">
-                            <div class="card-anime-type">Series</div>
-                            <div class="card-anime-date">07-05-2017</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<%--            <div class="col-4">--%>
+<%--                <div class="card rounded bg-dark text-light mx-auto" style="width: 18rem;">--%>
+<%--                    <div class="card-image">--%>
+<%--                        <img src="${pageContext.request.contextPath}/img/Boruto.jpg" class="card-img-top rounded" alt="anime-image">--%>
+<%--                    </div>--%>
+<%--                    <div class="card-body pt-0">--%>
+<%--                        <h5 class="card-title" title="Боруто. Наруто: Следующее поколение">Боруто. Наруто: Следующее поколение</h5>--%>
+<%--                        <div class="card-details d-flex justify-content-between fs-5 text-muted">--%>
+<%--                            <div class="card-anime-type">Series</div>--%>
+<%--                            <div class="card-anime-date">07-05-2017</div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
 
-        </div>
+<%--            <div class="col-4">--%>
+<%--                <div class="card rounded bg-dark text-light mx-auto" style="width: 18rem;">--%>
+<%--                    <div class="card-image">--%>
+<%--                        <img src="${pageContext.request.contextPath}/img/Boruto.jpg" class="card-img-top rounded" alt="anime-image">--%>
+<%--                    </div>--%>
+<%--                    <div class="card-body pt-0">--%>
+<%--                        <h5 class="card-title" title="Боруто. Наруто: Следующее поколение">Боруто. Наруто: Следующее поколение</h5>--%>
+<%--                        <div class="card-details d-flex justify-content-between fs-5 text-muted">--%>
+<%--                            <div class="card-anime-type">Series</div>--%>
+<%--                            <div class="card-anime-date">07-05-2017</div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
 
-    </div>
-</section>
+<%--        </div>--%>
+
+<%--    </div>--%>
+<%--</section>--%>
 
 <section class="footer-wrapper bg-dark p-3">
     <footer class="d-flex justify-content-center text-light">

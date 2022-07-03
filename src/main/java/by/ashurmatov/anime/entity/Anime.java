@@ -10,11 +10,13 @@ public class Anime extends AbstractEntity{
     private String genre;
     private int ageLimit;
     private String description;
+    private String image_path;
+
 
     public Anime() {
     }
 
-    public Anime(int id, String name, String country, int createdYear, String genre, int ageLimit, String description) {
+    public Anime(int id, String name, String country, int createdYear, String genre, int ageLimit, String description, String image_path) {
         this.id = id;
         this.name = name;
         this.country = country;
@@ -22,6 +24,7 @@ public class Anime extends AbstractEntity{
         this.genre = genre;
         this.ageLimit = ageLimit;
         this.description = description;
+        this.image_path = image_path;
     }
 
     public int getId() {
@@ -80,17 +83,25 @@ public class Anime extends AbstractEntity{
         this.description = description;
     }
 
+    public String getImage_path() {
+        return image_path;
+    }
+
+    public void setImage_path(String image_path) {
+        this.image_path = image_path;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Anime anime = (Anime) o;
-        return id == anime.id && createdYear == anime.createdYear && ageLimit == anime.ageLimit && Objects.equals(name, anime.name) && Objects.equals(country, anime.country) && Objects.equals(genre, anime.genre) && Objects.equals(description, anime.description);
+        return id == anime.id && createdYear == anime.createdYear && ageLimit == anime.ageLimit && Objects.equals(name, anime.name) && Objects.equals(country, anime.country) && Objects.equals(genre, anime.genre) && Objects.equals(description, anime.description) && Objects.equals(image_path, anime.image_path);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, country, createdYear, genre, ageLimit, description);
+        return Objects.hash(id, name, country, createdYear, genre, ageLimit, description, image_path);
     }
 
     @Override
@@ -103,6 +114,7 @@ public class Anime extends AbstractEntity{
                 ", genre='" + genre + '\'' +
                 ", ageLimit=" + ageLimit +
                 ", description='" + description + '\'' +
+                ", image_path='" + image_path + '\'' +
                 '}';
     }
 }

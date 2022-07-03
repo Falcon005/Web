@@ -23,6 +23,7 @@ public class AnimeMapper implements EntityMapper<Anime> {
             anime.setGenre(resultSet.getString(ColumnName.GENRE));
             anime.setAgeLimit(resultSet.getInt(ColumnName.AGE_LIMIT));
             anime.setDescription(resultSet.getString(ColumnName.DESCRIPTION));
+            anime.setImage_path(resultSet.getString(ColumnName.IMAGE_PATH));
 
             return Optional.of(anime);
         }catch (SQLException sqlException) {
