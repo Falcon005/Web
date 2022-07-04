@@ -50,7 +50,6 @@ public class ColumnName {
      */
 
     public static final String RATING_ID = "ratingid";
-    public static final String USER_ID_IN_RATING = "userid";
     public static final String ANIME_ID_IN_RATING = "animeid";
     public static final String VALUE = "value";
 

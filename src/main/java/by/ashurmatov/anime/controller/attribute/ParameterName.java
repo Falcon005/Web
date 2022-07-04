@@ -33,6 +33,7 @@ public final class ParameterName {
     public static final String ANIME_DELETED = "anime_deleted";
     public static final String ANIME_NOT_DELETED = "anime_not_deleted";
     public static final String TEMPORARY_ANIME = "temporary_anime";
+    public static final String CURRENT_PAGE = "current_page";
 
 
     /*
@@ -45,8 +46,14 @@ public final class ParameterName {
     public static final String ERROR_IN_BLOCKING = "error_in_blocking";
 
 
+    /**
+     * Rating parameters
+     */
 
-
+    public static final String TEMPORARY_RATING = "temporary_rating";
+    public static final String RATE = "rate";
+    public static final String ROW_DELETED = "row_deleted";
+    public static final String ROW_NOT_DELETED = "row_not_deleted";
 
 
     private ParameterName() {

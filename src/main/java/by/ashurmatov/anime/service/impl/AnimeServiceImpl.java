@@ -44,6 +44,16 @@ public class AnimeServiceImpl implements AnimeService {
     }
 
     @Override
+    public Optional<Integer> findIdByName(String name) throws ServiceException {
+        try {
+            return animeDao.findIdByName(name);
+        }catch (DaoException daoException) {
+            logger.error("Error in finding anime by his name " + daoException);
+            throw new ServiceException(daoException);
+        }
+    }
+
+    @Override
     public boolean register(Anime anime) throws ServiceException {
         boolean isSaved = false;
         try {

@@ -11,7 +11,7 @@ import java.util.Optional;
 
 public interface BaseDao<T extends AbstractEntity>{
     boolean insert(T t) throws DaoException;
-    boolean delete(Long Id) throws DaoException;
+    boolean delete(Long id) throws DaoException;
     List<T> findAll() throws DaoException;
     Optional<T> findById(Long id) throws DaoException;
 

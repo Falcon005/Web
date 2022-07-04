@@ -11,5 +11,6 @@ public class AnimeQuery {
     public static final String FIND_BY_ID = "SELECT animeid,name,country,createdyear,genre,agelimit,description,image_path FROM anime WHERE animeid = ?";
     public static final String EDIT_ANIME = "UPDATE anime SET name=?,country=?,createdyear=?,genre=?,agelimit=?,description=?,image_path=? WHERE animeid=?";
     public static final String CHECK_NAME = "SELECT country FROM anime WHERE name=?";
+    public static final String FIND_ID_BY_NAME = "SELECT animeid from anime WHERE name = ?";
 
 }

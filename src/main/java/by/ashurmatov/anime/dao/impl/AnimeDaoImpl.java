@@ -2,6 +2,7 @@ package by.ashurmatov.anime.dao.impl;
 
 import by.ashurmatov.anime.controller.attribute.CookieName;
 import by.ashurmatov.anime.dao.AnimeDao;
+import by.ashurmatov.anime.dao.mapper.ColumnName;
 import by.ashurmatov.anime.dao.mapper.impl.AnimeMapper;
 import by.ashurmatov.anime.dao.query.AnimeQuery;
 import by.ashurmatov.anime.entity.Anime;
@@ -124,8 +125,7 @@ public class AnimeDaoImpl implements AnimeDao {
             statement.setString(1,animeName);
             logger.info(statement.toString());
             try(ResultSet resultSet = statement.executeQuery()) {
-                boolean toReturn = !resultSet.next();
-                return  toReturn;
+                return !resultSet.next();
             }
         }catch (SQLException sqlException) {
             logger.error("Error in connecting the Database " + sqlException);
@@ -133,5 +133,23 @@ public class AnimeDaoImpl implements AnimeDao {
         }
     }
 
+    @Override
+    public Optional<Integer> findIdByName(String name) throws DaoException {
+        try (Connection connection = DynamicConnectionPool.getInstance().provideConnection();
+             PreparedStatement statement = connection.prepareStatement(AnimeQuery.FIND_ID_BY_NAME)) {
+            statement.setString(1,name);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                Optional<Integer> anime_id;
+                if (resultSet.next()) {
+                    anime_id = Optional.of(resultSet.getInt(ColumnName.ANIME_ID));
+                    return anime_id;
+                }
+            }
+        }catch (SQLException sqlException) {
+            logger.error("Error in finding Anime By his name in Database");
+            throw new DaoException(sqlException);
+        }
+        return Optional.empty();
+    }
 
 }

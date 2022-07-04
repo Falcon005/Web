@@ -5,14 +5,19 @@ import by.ashurmatov.anime.controller.command.Command;
 import by.ashurmatov.anime.controller.command.Router;
 import by.ashurmatov.anime.controller.path.PagePath;
 import by.ashurmatov.anime.entity.Anime;
+import by.ashurmatov.anime.entity.Rating;
 import by.ashurmatov.anime.exception.CommandException;
 import by.ashurmatov.anime.exception.ServiceException;
 import by.ashurmatov.anime.service.AnimeService;
+import by.ashurmatov.anime.service.RatingService;
 import by.ashurmatov.anime.service.impl.AnimeServiceImpl;
+import by.ashurmatov.anime.service.impl.RatingServiceImpl;
 import by.ashurmatov.anime.validator.AnimeValidator;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.Optional;
 
 public class AnimeAddCommand implements Command {
     private static final Logger logger = LogManager.getLogger(AnimeAddCommand.class);
@@ -20,6 +25,7 @@ public class AnimeAddCommand implements Command {
     public Router execute(HttpServletRequest request) throws CommandException{
         Router router;
         AnimeService animeService = AnimeServiceImpl.getInstance();
+        RatingService ratingService = RatingServiceImpl.getInstance();
         String animeName = request.getParameter(ParameterName.ANIME_NAME);
         String country = request.getParameter(ParameterName.COUNTRY_NAME);
         String createdYearString = request.getParameter(ParameterName.CREATED_YEAR);
@@ -60,8 +66,23 @@ public class AnimeAddCommand implements Command {
                     anime.setImage_path(imagePath);
 
                     if (animeService.register(anime)) {
-                        router = new AdminAllAnimeCommand().execute(request);
-                        return router;
+                        Optional<Integer> optionalIdOfAnime = animeService.findIdByName(anime.getName());
+                        if (optionalIdOfAnime.isEmpty()) {
+                            logger.error("optionalIdOfAnime is empty");
+                            throw new CommandException("optionalIdOfAnime is empty");
+                        }
+                        Rating rating = new Rating();
+                        rating.setAnime_id(optionalIdOfAnime.get());
+                        rating.setValue(0);
+                        if (ratingService.register(rating)) {
+                            logger.info("Rating row is created with new Anime");
+                            router = new AdminAllAnimeCommand().execute(request);
+                            return router;
+                        }else {
+                            logger.error("Rating row is not created with new Anime");
+                            throw new CommandException("Rating row is not created with new Anime");
+                        }
+
                     } else {
                         logger.error("Anime is not saved to Database ");
                         return new Router(PagePath.ADD_PAGE,Router.Type.FORWARD);
