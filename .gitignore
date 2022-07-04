@@ -38,7 +38,7 @@ build/
 ### Mac OS ###
 .DS_Store
 
-/.idea/
-/.mvn/
+.idea/
+.mvn/
 
 
