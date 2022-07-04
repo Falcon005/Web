@@ -83,9 +83,9 @@
 <section class="main-wrapper">
     <div class="container py-4">
         <jsp:useBean id="anime_list" scope="request" type="java.util.List"/>
-        <c:forEach var="tempAnime" items="${anime_list}">
-            <div class="row my-3">
-                <div class="col-4 mx-auto">
+        <div class="row my-3">
+            <c:forEach var="tempAnime" items="${anime_list}">
+                <div class="col my-2 mx-auto anime-item">
                     <div class="card rounded bg-dark text-light mx-auto" style="width: 18rem;">
                         <div class="card-image">
                             <form action="${pageContext.request.contextPath}/controller.do" class="card-image-content">
@@ -105,8 +105,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </c:forEach>
+            </c:forEach>
+        </div>
     </div>
 </section>
 <section class="footer-wrapper bg-dark p-3">

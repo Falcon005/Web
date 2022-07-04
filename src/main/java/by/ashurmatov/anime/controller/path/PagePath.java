@@ -13,6 +13,7 @@ public final class PagePath {
     public static final String HOME_MOVIES_PAGE = "/pages/jsp/main/admin/movies/home_anime.jsp";
     public static final String HOME_MOVIES_FOR_USER_PAGE = "/pages/jsp/main/admin/movies/home_anime_for_user.jsp";
     public static final String ONE_PAGE_FOR_ALL_ANIME = "/pages/jsp/main/admin/movies/one_page_for_all_anime.jsp";
+    public static final String ONE_PAGE_FOR_ALL_ANIME_FOR_USER = "/pages/jsp/main/admin/movies/one_page_for_all_anime_for_user.jsp";
 
 
     private PagePath(){

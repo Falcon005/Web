@@ -87,7 +87,7 @@
 <%--                    <img src="${pageContext.request.contextPath}/img/<jsp:getProperty name="temporary_anime" property="image_path"/>" class="card-img-top rounded anime-image" alt="anime-image">--%>
                     <img src="<jsp:getProperty name="temporary_anime" property="image_path"/>" class="card-img-top rounded anime-image" alt="anime-image">
                     <div class="anime-rate-comment">
-                        <form action="${pageContext.request.contextPath}/controller.do">
+                        <form action="${pageContext.request.contextPath}/controller.do" class="rate-wrapper">
                             <input type="hidden" name="command" value="rating"/>
                             <div class="rate">
                                 <input type="radio" id="star10" name="rate" value="10" />

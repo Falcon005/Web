@@ -147,7 +147,9 @@ body {
 .rate {
     float: left;
     height: 46px;
-    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
 }
 .rate:not(:checked) > input {
     position:absolute;
@@ -159,7 +161,7 @@ body {
     overflow:hidden;
     white-space:nowrap;
     cursor:pointer;
-    font-size:30px;
+    font-size:20px;
     color:#ccc;
 }
 .rate:not(:checked) > label:before {
@@ -180,3 +182,14 @@ body {
     color: #c59b08;
 }
 
+.rate-wrapper {
+    display: flex;
+    width: 100%;
+    height: 100px;
+    align-items: start;
+    flex-direction: column;
+}
+
+.anime-item {
+    width: 440px;
+}

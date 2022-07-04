@@ -13,12 +13,14 @@ public enum CommandType {
     LOGIN(new LoginCommand()),
     LOGOUT(new LogoutCommand()),
     RATING(new RatingCommand()),
+    RATING_FOR_USER(new RatingForUserCommand()),
     REGISTER(new RegisterCommand()),
     USER_BLOCK(new UserBlockCommand()),
     USER_ACTIVATE(new UserActivateCommand()),
     FIND_ANIME_TO_UPDATE(new FindAnimeToUpdate()),
     HOME_ALL_ANIME(new HomeAllAnimeCommand()),
     ONE_PAGE_FOR_ALL_ANIME(new OnePageForAllAnimeCommand()),
+    ONE_PAGE_FOR_ALL_ANIME_FOR_USER(new OnePageForAllAnimeForUserCommand()),
     HOME_ALL_ANIME_FOR_USER(new HomeAllAnimeForUserCommand()),
     DEFAULT_COMMAND(new DefaultCommand());
 
