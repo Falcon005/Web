@@ -193,3 +193,27 @@ body {
 .anime-item {
     width: 440px;
 }
+
+.for_description {
+    min-width: 300px;
+}
+
+.for_description p {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    -webkit-line-clamp: 4;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
+
+.for_img_path {
+    max-width: 250px;
+}
+
+.for_img_path p {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    -webkit-line-clamp: 1;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}

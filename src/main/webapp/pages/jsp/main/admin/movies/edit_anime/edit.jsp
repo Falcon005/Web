@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js" integrity="sha512-6PM0qYu5KExuNcKt5bURAoT6KCThUmHRewN3zUFNaoI6Di7XJPTMoT6K0nsagZKk2OB4L7E3q1uQKHNHd4stIQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <title>Add Anime Page</title>
+    <jsp:useBean id="temporary_anime" scope="session" type="by.ashurmatov.anime.entity.Anime"/>
 </head>
 <body>
 
@@ -85,32 +86,34 @@
         <div class="col-12 form-title fs-3 text-center">Anime Edition</div>
         <div class="col-12 mb-2">
             <label for="inputAnimeName" class="form-label">Anime Name</label>
-            <input type="text" name="animeName" class="form-control" id="inputAnimeName" placeholder="Anime name">
+            <input type="text" name="animeName" class="form-control" id="inputAnimeName" value="<jsp:getProperty name="temporary_anime" property="name"/>">
         </div>
         <div class="col-12 mb-2">
             <label for="inputCountryName" class="form-label">Country name</label>
-            <input type="text" name="countryName" class="form-control" id="inputCountryName" placeholder="Country name">
+            <input type="text" name="countryName" class="form-control" id="inputCountryName" value="<jsp:getProperty name="temporary_anime" property="country"/>">
         </div>
         <div class="col-12 mb-2">
             <label for="inputCreatedYear" class="form-label">Created year</label>
-            <input type="text" name="createdYear" class="form-control" id="inputCreatedYear" placeholder="Created year">
+            <input type="text" name="createdYear" class="form-control" id="inputCreatedYear" value="<jsp:getProperty name="temporary_anime" property="createdYear"/>">
         </div>
         <div class="col-12 mb-2">
             <label for="inputGenre" class="form-label">Genre</label>
-            <input type="text" name="genre" class="form-control" id="inputGenre" placeholder="Genre">
+            <input type="text" name="genre" class="form-control" id="inputGenre" value="<jsp:getProperty name="temporary_anime" property="genre"/>">
         </div>
         <div class="col-12 mb-2">
             <label for="inputAgeLimit" class="form-label">Age Limit</label>
-            <input type="text" name="ageLimit" class="form-control" id="inputAgeLimit" placeholder="Age Limit">
+            <input type="text" name="ageLimit" class="form-control" id="inputAgeLimit" value="<jsp:getProperty name="temporary_anime" property="ageLimit"/>">
         </div>
         <div class="col-12 mb-2">
             <label for="inputDescription" class="form-label">Description</label>
             <%--            <input type="text" class="form-control" id="inputDescription" placeholder="Description">--%>
-            <textarea rows="5" cols="50" id="inputDescription" class="form-control" name="description"></textarea>
+            <textarea rows="5" cols="50" id="inputDescription" class="form-control" name="description" >
+                <jsp:getProperty name="temporary_anime" property="description"/>
+            </textarea>
         </div>
         <div class="col-12 mb-2">
             <label for="inputImagePath" class="form-label">Image path</label>
-            <input type="text" name="imagePath" class="form-control" id="inputImagePath" placeholder="Image Path">
+            <input type="text" name="imagePath" class="form-control" id="inputImagePath" value="<jsp:getProperty name="temporary_anime" property="image_path"/>">
         </div>
         <div class="col-12 my-2 text-center">
             <button type="submit" class="btn btn-primary">Edit</button>

@@ -126,8 +126,12 @@
                     <td>${tempAnime.createdYear}</td>
                     <td>${tempAnime.genre}</td>
                     <td>${tempAnime.ageLimit}</td>
-                    <td>${tempAnime.description}</td>
-                    <td>${tempAnime.image_path}</td>
+                    <td class="for_description">
+                        <p>${tempAnime.description}</p>
+                    </td>
+                    <td class="for_img_path">
+                        <p>${tempAnime.image_path}</p>
+                    </td>
                     <td class="table-actions">
                         <div>
                             <form action="${pageContext.request.contextPath}/controller.do">
