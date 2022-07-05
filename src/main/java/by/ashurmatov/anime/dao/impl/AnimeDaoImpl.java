@@ -7,7 +7,7 @@ import by.ashurmatov.anime.dao.mapper.impl.AnimeMapper;
 import by.ashurmatov.anime.dao.query.AnimeQuery;
 import by.ashurmatov.anime.entity.Anime;
 import by.ashurmatov.anime.exception.DaoException;
-import by.ashurmatov.anime.pool.DynamicConnectionPool;
+import by.ashurmatov.anime.pool.ConnectionPool;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import java.sql.Connection;
@@ -30,8 +30,8 @@ public class AnimeDaoImpl implements AnimeDao {
     }
     @Override
     public boolean insert(Anime anime) throws DaoException {
-        try (Connection connection = DynamicConnectionPool.getInstance().provideConnection();
-            PreparedStatement statement = connection.prepareStatement(AnimeQuery.INSERT_ANIME_QUERY)) {
+        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
+             PreparedStatement statement = connection.prepareStatement(AnimeQuery.INSERT_ANIME_QUERY)) {
             statement.setString(1,anime.getName());
             statement.setString(2,anime.getCountry());
             statement.setInt(3,anime.getCreatedYear());
@@ -49,7 +49,7 @@ public class AnimeDaoImpl implements AnimeDao {
 
     @Override
     public boolean delete(Long id) throws DaoException {
-        try (Connection connection = DynamicConnectionPool.getInstance().provideConnection();
+        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
             PreparedStatement statement = connection.prepareStatement(AnimeQuery.DELETE_ANIME_BY_ID)) {
             statement.setLong(1,id);
             int count = statement.executeUpdate();
@@ -62,7 +62,7 @@ public class AnimeDaoImpl implements AnimeDao {
 
     @Override
     public List<Anime> findAll() throws DaoException {
-        try (Connection connection = DynamicConnectionPool.getInstance().provideConnection();
+        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement statement = connection.prepareStatement(AnimeQuery.SELECT_ALL_ANIME)) {
             try(ResultSet resultSet = statement.executeQuery()) {
                 List<Anime> animeList = new ArrayList<>();
@@ -80,7 +80,7 @@ public class AnimeDaoImpl implements AnimeDao {
 
     @Override
     public Optional<Anime> findById(Long id) throws DaoException {
-        try (Connection connection = DynamicConnectionPool.getInstance().provideConnection();
+        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
             PreparedStatement statement = connection.prepareStatement(AnimeQuery.FIND_BY_ID)) {
             statement.setLong(1,id);
             try (ResultSet resultSet = statement.executeQuery()) {
@@ -100,7 +100,7 @@ public class AnimeDaoImpl implements AnimeDao {
 
     @Override
     public boolean editAnime(Anime anime, Long id) throws DaoException {
-        try(Connection connection = DynamicConnectionPool.getInstance().provideConnection();
+        try(Connection connection = ConnectionPool.INSTANCE.getConnection();
             PreparedStatement statement = connection.prepareStatement(AnimeQuery.EDIT_ANIME)) {
             statement.setString(1,anime.getName());
             statement.setString(2,anime.getCountry());
@@ -120,7 +120,7 @@ public class AnimeDaoImpl implements AnimeDao {
 
     @Override
     public boolean isAnimeNameAvailable(String animeName) throws DaoException {
-        try(Connection connection = DynamicConnectionPool.getInstance().provideConnection();
+        try(Connection connection = ConnectionPool.INSTANCE.getConnection();
             PreparedStatement statement = connection.prepareStatement(AnimeQuery.CHECK_NAME)) {
             statement.setString(1,animeName);
             logger.info(statement.toString());
@@ -135,7 +135,7 @@ public class AnimeDaoImpl implements AnimeDao {
 
     @Override
     public Optional<Integer> findIdByName(String name) throws DaoException {
-        try (Connection connection = DynamicConnectionPool.getInstance().provideConnection();
+        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement statement = connection.prepareStatement(AnimeQuery.FIND_ID_BY_NAME)) {
             statement.setString(1,name);
             try (ResultSet resultSet = statement.executeQuery()) {

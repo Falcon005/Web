@@ -1,6 +1,6 @@
 package by.ashurmatov.anime.controller.command.impl;
 
-import by.ashurmatov.anime.controller.attribute.ParameterName;
+
 import by.ashurmatov.anime.controller.command.Command;
 import by.ashurmatov.anime.controller.command.Router;
 import by.ashurmatov.anime.controller.path.PagePath;
@@ -16,9 +16,6 @@ public class LogoutCommand implements Command {
         HttpSession session = request.getSession();
         if (!session.isNew()) {
             session.invalidate();
-//            response.setHeader("Cache-Control","no-cache");
-//            response.setHeader("Cache-Control","no-store");
-//            response.setDateHeader("Expires", 0);
             logger.info("Session is destroyed in Logout Command");
         }
         return new Router(PagePath.INDEX_PAGE,Router.Type.REDIRECT);

@@ -1,6 +1,7 @@
 package by.ashurmatov.anime.util;
 
-import by.ashurmatov.anime.pool.DynamicConnectionPool;
+
+import by.ashurmatov.anime.pool.ConnectionPool;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -28,7 +29,7 @@ public class DaoUtil {
      * @author Dmitriy Belotskiy
      */
     public static void releaseResources(Connection connection, PreparedStatement preparedStatement) {
-        DynamicConnectionPool.getInstance().releaseConnection(connection);
+        ConnectionPool.INSTANCE.releaseConnection(connection);
         if (preparedStatement != null) {
             try {
                 preparedStatement.close();

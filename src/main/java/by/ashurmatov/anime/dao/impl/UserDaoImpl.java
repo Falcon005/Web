@@ -9,7 +9,7 @@ import by.ashurmatov.anime.entity.type.Status;
 import by.ashurmatov.anime.exception.DaoException;
 import by.ashurmatov.anime.entity.User;
 import by.ashurmatov.anime.entity.type.UserRole;
-import by.ashurmatov.anime.pool.DynamicConnectionPool;
+import by.ashurmatov.anime.pool.ConnectionPool;
 import by.ashurmatov.anime.validator.UserValidator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -36,7 +36,7 @@ public class UserDaoImpl implements UserDao {
     public boolean insert(User user) throws DaoException{
 
 
-        try(Connection connection = DynamicConnectionPool.getInstance().provideConnection();
+        try(Connection connection = ConnectionPool.INSTANCE.getConnection();
             PreparedStatement statement = connection.prepareStatement(UserQuery.INSERT_USER_QUERY)){
             statement.setString(1, user.getEmail());
             statement.setString(2, user.getRole().toString());
@@ -56,7 +56,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public boolean delete(Long id) throws DaoException{
-        try (Connection connection = DynamicConnectionPool.getInstance().provideConnection();
+        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
             PreparedStatement statement = connection.prepareStatement(UserQuery.DELETE_USER_BY_ID)) {
             statement.setLong(1, id);
             int count = statement.executeUpdate();
@@ -70,7 +70,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<User> findAll() throws DaoException{
-        try (Connection connection = DynamicConnectionPool.getInstance().provideConnection();
+        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
             PreparedStatement statement = connection.prepareStatement(UserQuery.SELECT_ALL_USERS)) {
             try (ResultSet resultSet = statement.executeQuery()) {
                 List<User> users = new ArrayList<>();
@@ -90,7 +90,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public Optional<User> findById(Long id) throws DaoException{
-        try (Connection connection = DynamicConnectionPool.getInstance().provideConnection();
+        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
             PreparedStatement statement = connection.prepareStatement(UserQuery.FIND_BY_ID)) {
             statement.setLong(1, id);
             try (ResultSet resultSet = statement.executeQuery()) {
@@ -109,7 +109,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public Optional<User> findByLogin(String login) throws DaoException {
-        try (Connection connection = DynamicConnectionPool.getInstance().provideConnection();
+        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
             PreparedStatement statement = connection.prepareStatement(UserQuery.SELECT_BY_LOGIN)) {
             statement.setString(1,login);
             try (ResultSet resultSet = statement.executeQuery()) {
@@ -129,7 +129,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public UserRole findUserRole(String login) throws DaoException {
         UserRole userRole = null;
-        try(Connection connection = DynamicConnectionPool.getInstance().provideConnection();
+        try(Connection connection = ConnectionPool.INSTANCE.getConnection();
             PreparedStatement statement = connection.prepareStatement(UserQuery.FIND_USER_ROLE_BY_LOGIN)) {
             statement.setString(1, login);
             try (ResultSet resultSet = statement.executeQuery()) {
@@ -147,7 +147,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public Status findUserStatus(String login) throws DaoException {
         Status status = null;
-        try(Connection connection = DynamicConnectionPool.getInstance().provideConnection();
+        try(Connection connection = ConnectionPool.INSTANCE.getConnection();
             PreparedStatement statement = connection.prepareStatement(UserQuery.FIND_USER_STATUS_BY_LOGIN)) {
             statement.setString(1,login);
             try(ResultSet resultSet = statement.executeQuery()) {
@@ -164,7 +164,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<User> findUsersByRole(UserRole userRole) throws DaoException {
-        try (Connection connection = DynamicConnectionPool.getInstance().provideConnection();
+        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
             PreparedStatement statement = connection.prepareStatement(UserQuery.FIND_BY_ROLE)) {
             statement.setString(1,userRole.toString().toUpperCase());
             return getUsersByRole(statement);
@@ -187,7 +187,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public boolean deleteByLogin(String login) throws DaoException {
-        try (Connection connection = DynamicConnectionPool.getInstance().provideConnection();
+        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
             PreparedStatement statement = connection.prepareStatement(UserQuery.DELETE_BY_LOGIN)) {
             statement.setString(1,login);
             int count = statement.executeUpdate();
@@ -199,7 +199,7 @@ public class UserDaoImpl implements UserDao {
     }
     @Override
     public boolean deleteSoThatToChangeStatusToBlocked(String login) throws DaoException {
-        try (Connection connection = DynamicConnectionPool.getInstance().provideConnection();
+        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
             PreparedStatement statement = connection.prepareStatement(UserQuery.DELETE_SO_THAT_TO_CHANGE_STATUS_TO_BLOCKED)) {
             statement.setString(1,login);
             int count = statement.executeUpdate();
@@ -212,7 +212,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public boolean activateSoThatToChangeStatusToActivated(String login) throws DaoException {
-        try(Connection connection = DynamicConnectionPool.getInstance().provideConnection();
+        try(Connection connection = ConnectionPool.INSTANCE.getConnection();
             PreparedStatement statement = connection.prepareStatement(UserQuery.ACTIVATE_SO_THAT_TO_CHANGE_STATUS_TO_ACTIVATED)) {
             statement.setString(1,login);
             int count  = statement.executeUpdate();
@@ -225,7 +225,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public boolean updateUser(User user) throws DaoException {
-        try (Connection connection = DynamicConnectionPool.getInstance().provideConnection();
+        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
             PreparedStatement statement = connection.prepareStatement(UserQuery.UPDATE_USER)) {
             statement.setString(1, user.getEmail());
             statement.setString(2,user.getFirstname());
@@ -243,7 +243,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public boolean updatePassword(String login, String newPassword) throws DaoException {
-        try (Connection connection = DynamicConnectionPool.getInstance().provideConnection();
+        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
             PreparedStatement statement = connection.prepareStatement(UserQuery.UPDATE_PASSWORD)) {
             statement.setString(1,newPassword);
             statement.setString(2,login);
@@ -270,7 +270,7 @@ public class UserDaoImpl implements UserDao {
 
 
     private boolean EmailAndLoginChecker(String loginOrEmail, String check) throws DaoException{
-        try(Connection connection = DynamicConnectionPool.getInstance().provideConnection();
+        try(Connection connection = ConnectionPool.INSTANCE.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(check)){
             logger.info(loginOrEmail + " is login or email");
             preparedStatement.setString(1,loginOrEmail);
@@ -294,7 +294,7 @@ public class UserDaoImpl implements UserDao {
         if (login.isEmpty() || password.isEmpty()) {
             return false;
         }
-        try(Connection connection = DynamicConnectionPool.getInstance().provideConnection();
+        try(Connection connection = ConnectionPool.INSTANCE.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(UserQuery.CHECK_FOR_LOGIN)){
             preparedStatement.setString(1,login);
             try(ResultSet resultSet = preparedStatement.executeQuery()) {

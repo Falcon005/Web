@@ -6,7 +6,7 @@ import by.ashurmatov.anime.dao.mapper.impl.CommentMapper;
 import by.ashurmatov.anime.dao.query.CommentQuery;
 import by.ashurmatov.anime.entity.Comment;
 import by.ashurmatov.anime.exception.DaoException;
-import by.ashurmatov.anime.pool.DynamicConnectionPool;
+import by.ashurmatov.anime.pool.ConnectionPool;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -30,7 +30,7 @@ public class CommentDaoImpl implements CommentDao {
     }
     @Override
     public boolean insert(Comment comment) throws DaoException {
-        try (Connection connection = DynamicConnectionPool.getInstance().provideConnection();
+        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement statement = connection.prepareStatement(CommentQuery.INSERT_COMMENT_QUERY)) {
             statement.setString(1, comment.getComment_text());
             statement.setInt(2, comment.getAnime_id());
@@ -45,7 +45,7 @@ public class CommentDaoImpl implements CommentDao {
 
     @Override
     public boolean delete(Long id) throws DaoException {
-        try (Connection connection = DynamicConnectionPool.getInstance().provideConnection();
+        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
             PreparedStatement statement = connection.prepareStatement(CommentQuery.DELETE_COMMENT_BY_ID)) {
             statement.setLong(1, id);
             int count = statement.executeUpdate();
@@ -58,7 +58,7 @@ public class CommentDaoImpl implements CommentDao {
 
     @Override
     public List<Comment> findAll() throws DaoException {
-        try (Connection connection = DynamicConnectionPool.getInstance().provideConnection();
+        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
             PreparedStatement statement = connection.prepareStatement(CommentQuery.SELECT_ALL_COMMENT);
              ResultSet resultSet = statement.executeQuery()) {
             List<Comment> commentList = new ArrayList<>();
@@ -75,7 +75,7 @@ public class CommentDaoImpl implements CommentDao {
 
     @Override
     public Optional<Comment> findById(Long id) throws DaoException {
-        try (Connection connection = DynamicConnectionPool.getInstance().provideConnection();
+        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
             PreparedStatement statement = connection.prepareStatement(CommentQuery.FIND_BY_ID)) {
             statement.setLong(1,id);
             try (ResultSet resultSet = statement.executeQuery()) {
@@ -94,7 +94,7 @@ public class CommentDaoImpl implements CommentDao {
 
     @Override
     public List<Comment> findAllCommentByAnimeId(long id) throws DaoException{
-        try (Connection connection = DynamicConnectionPool.getInstance().provideConnection();
+        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
             PreparedStatement statement = connection.prepareStatement(CommentQuery.FIND_COMMENT_BY_ANIME_ID)) {
             statement.setLong(1,id);
             try (ResultSet resultSet = statement.executeQuery()) {
@@ -114,7 +114,7 @@ public class CommentDaoImpl implements CommentDao {
 
     @Override
     public boolean deleteAllCommentByAnime(long id) throws DaoException {
-        try (Connection connection = DynamicConnectionPool.getInstance().provideConnection();
+        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
             PreparedStatement statement = connection.prepareStatement(CommentQuery.DELETE_COMMENT_BY_ANIME_ID)) {
             statement.setLong(1, id);
             int count = statement.executeUpdate();
