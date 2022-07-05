@@ -22,7 +22,7 @@ public class RatingServiceImpl implements RatingService {
 
     @Override
     public boolean register(Rating rating) throws ServiceException {
-        boolean isSaved = false;
+        boolean isSaved;
         try {
             isSaved = ratingDao.insert(rating);
         }catch (DaoException daoException) {
@@ -47,7 +47,7 @@ public class RatingServiceImpl implements RatingService {
         try {
             return ratingDao.findAll();
         }catch (DaoException daoException) {
-            logger.error("Error in finding all rating in Database "+ daoException);
+            logger.error("Error in finding all rates in Database "+ daoException);
             throw new ServiceException(daoException);
         }
     }

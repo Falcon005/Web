@@ -4,12 +4,11 @@ import by.ashurmatov.anime.controller.command.impl.*;
 
 public enum CommandType {
     ADMIN_ALL_ANIME(new AdminAllAnimeCommand()),
-    COMMENT(new CommentCommand()),
+    COMMENT_FOR_USER(new CommentForUserCommand()),
     ADMIN_USERS(new AdminUsersCommand()),
     ANIME_ADD(new AnimeAddCommand()),
     ANIME_DELETE(new AnimeDeleteCommand()),
     ANIME_EDIT(new AnimeEditCommand()),
-    HOME(new HomeCommand()),
     LOGIN(new LoginCommand()),
     LOGOUT(new LogoutCommand()),
     RATING(new RatingCommand()),

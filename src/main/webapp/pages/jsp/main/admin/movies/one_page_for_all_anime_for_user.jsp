@@ -34,7 +34,7 @@
         <ul class="navbar-nav navbar-nav-scroll w-50 justify-content-evenly">
           <li class="nav-item">
             <form class="nav-link" action="${pageContext.request.contextPath}/controller.do">
-              <input type="hidden" name="command" value="home_all_anime"/>
+              <input type="hidden" name="command" value="home_all_anime_for_user"/>
               <input type="submit" value="Home"/>
             </form>
           </li>
@@ -138,7 +138,38 @@
     </div>
     <div class="row anime-comments"></div>
   </div>
+  <form action="${pageContext.request.contextPath}/controller.do">
+    <div class="col-12 mb-2">
+      <input type="hidden" name="command" value="comment_for_user"/>
+      <label for="inputComment" class="form-label">Comment</label>
+      <textarea rows="3" cols="10" id="inputComment" class="form-control" name="comment"></textarea>
+      <button type="submit" name="id" value="${temporary_anime.id}" class="btn btn-primary">Post comment</button>
+    </div>
+  </form>
+
+  <div class="container">
+    <table class="table table-bordered border-primary table-hover">
+      <thead class="bg-primary text-light">
+      <tr>
+        <th scope="col">Comment</th>
+      </tr>
+      </thead>
+      <tbody>
+      <jsp:useBean id="comment_list" scope="request" type="java.util.List"/>
+      <c:forEach var="temp_comment" items="${comment_list}">
+        <tr>
+          <td>${temp_comment.comment_text}</td>
+        </tr>
+      </c:forEach>
+      </tbody>
+      <!-- <tfoot>
+
+      </tfoot> -->
+    </table>
+  </div>
 </section>
+
+
 
 <section class="footer-wrapper bg-dark p-3">
   <footer class="d-flex justify-content-center text-light">

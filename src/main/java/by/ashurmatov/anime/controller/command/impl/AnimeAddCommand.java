@@ -5,12 +5,15 @@ import by.ashurmatov.anime.controller.command.Command;
 import by.ashurmatov.anime.controller.command.Router;
 import by.ashurmatov.anime.controller.path.PagePath;
 import by.ashurmatov.anime.entity.Anime;
+import by.ashurmatov.anime.entity.Comment;
 import by.ashurmatov.anime.entity.Rating;
 import by.ashurmatov.anime.exception.CommandException;
 import by.ashurmatov.anime.exception.ServiceException;
 import by.ashurmatov.anime.service.AnimeService;
+import by.ashurmatov.anime.service.CommentService;
 import by.ashurmatov.anime.service.RatingService;
 import by.ashurmatov.anime.service.impl.AnimeServiceImpl;
+import by.ashurmatov.anime.service.impl.CommentServiceImpl;
 import by.ashurmatov.anime.service.impl.RatingServiceImpl;
 import by.ashurmatov.anime.validator.AnimeValidator;
 import jakarta.servlet.http.HttpServletRequest;
@@ -26,6 +29,7 @@ public class AnimeAddCommand implements Command {
         Router router;
         AnimeService animeService = AnimeServiceImpl.getInstance();
         RatingService ratingService = RatingServiceImpl.getInstance();
+        CommentService commentService = CommentServiceImpl.getInstance();
         String animeName = request.getParameter(ParameterName.ANIME_NAME);
         String country = request.getParameter(ParameterName.COUNTRY_NAME);
         String createdYearString = request.getParameter(ParameterName.CREATED_YEAR);
@@ -74,13 +78,18 @@ public class AnimeAddCommand implements Command {
                         Rating rating = new Rating();
                         rating.setAnime_id(optionalIdOfAnime.get());
                         rating.setValue(0);
-                        if (ratingService.register(rating)) {
-                            logger.info("Rating row is created with new Anime");
+
+                        Comment comment = new Comment();
+                        comment.setComment_text("Hello World");
+                        comment.setAnime_id(optionalIdOfAnime.get());
+
+                        if (ratingService.register(rating) && commentService.register(comment)) {
+                            logger.info("Row of rating and  row of comment  are created with new Anime");
                             router = new AdminAllAnimeCommand().execute(request);
                             return router;
                         }else {
-                            logger.error("Rating row is not created with new Anime");
-                            throw new CommandException("Rating row is not created with new Anime");
+                            logger.error("row of rating and row of comment  are not created with new Anime");
+                            throw new CommandException("row of rating and row of comment  are not created with new Anime");
                         }
 
                     } else {

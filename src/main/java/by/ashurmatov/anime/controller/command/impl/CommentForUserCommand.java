@@ -23,34 +23,44 @@ import org.apache.logging.log4j.Logger;
 import java.util.List;
 import java.util.Optional;
 
-public class OnePageForAllAnimeForUserCommand implements Command {
-    private static final Logger logger = LogManager.getLogger(OnePageForAllAnimeForUserCommand.class);
-
+public class CommentForUserCommand implements Command {
+    private static final Logger logger = LogManager.getLogger(CommentForUserCommand.class);
     @Override
     public Router execute(HttpServletRequest request) throws CommandException {
         HttpSession session = request.getSession();
         AnimeService animeService = AnimeServiceImpl.getInstance();
         RatingService ratingService = RatingServiceImpl.getInstance();
         CommentService commentService = CommentServiceImpl.getInstance();
-        Router router;
+        Router router = new Router((String) session.getAttribute(ParameterName.CURRENT_PAGE));
         long id = Long.parseLong(request.getParameter(ParameterName.ANIME_ID));
+        String comment_text = request.getParameter(ParameterName.COMMENT);
+
         try {
             Optional<Anime> optionalAnime = animeService.findById(id);
             Optional<Rating> optionalRating = ratingService.findRatingByAnimeId(id);
-            List<Comment> commentList = commentService.findAllCommentByAnimeId(id);
-            if (optionalAnime.isEmpty() || optionalRating.isEmpty()) {
-                throw new CommandException("could not find the rating of anime  with id number: " + id);
+            Comment comment = new Comment();
+            comment.setComment_text(comment_text);
+            comment.setAnime_id((int) id);
+            if (commentService.register(comment)) {
+                if (optionalAnime.isEmpty() || optionalRating.isEmpty()) {
+                    logger.error("optionalAnime or optionalRating is empty");
+                    throw new CommandException("optionalAnime or optionalRating is empty");
+                }
+                Anime anime = optionalAnime.get();
+                Rating rating = optionalRating.get();
+                List<Comment> commentList = commentService.findAllCommentByAnimeId(id);
+                request.setAttribute(ParameterName.TEMPORARY_ANIME,anime);
+                request.setAttribute(ParameterName.TEMPORARY_RATING,rating);
+                request.setAttribute(ParameterName.COMMENT_LIST,commentList);
+                session.setAttribute(ParameterName.CURRENT_PAGE, PagePath.ONE_PAGE_FOR_ALL_ANIME_FOR_USER);
+                return router;
+
+            }else {
+                logger.error("Couldn't register comment into Database ");
+                throw new CommandException("Couldn't register comment into Database ");
             }
-            Anime anime = optionalAnime.get();
-            Rating rating = optionalRating.get();
-            request.setAttribute(ParameterName.TEMPORARY_ANIME,anime);
-            request.setAttribute(ParameterName.TEMPORARY_RATING,rating);
-            request.setAttribute(ParameterName.COMMENT_LIST, commentList);
-            session.setAttribute(ParameterName.CURRENT_PAGE, PagePath.ONE_PAGE_FOR_ALL_ANIME_FOR_USER);
-            router = new Router(PagePath.ONE_PAGE_FOR_ALL_ANIME_FOR_USER,Router.Type.FORWARD);
-            return router;
         }catch (ServiceException serviceException) {
-            logger.error("Error in finding the anime by id " + serviceException);
+            logger.error("Error in CommentForUser command " + serviceException);
             throw new CommandException(serviceException);
         }
     }

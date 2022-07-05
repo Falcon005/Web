@@ -16,7 +16,9 @@ public final class ParameterName {
     public static final String USER_NOT_BLOCKED = "user_not_blocked";
     public static final String USER_ACTIVATED = "user_activated";
     public static final String USER_NOT_ACTIVATED = "user_not_activated";
+    public static final String COMMENT_LIST = "comment_list";
 
+    public static final String COMMENT = "comment";
 
     /**
      * Anime Parameter
@@ -54,6 +56,8 @@ public final class ParameterName {
     public static final String RATE = "rate";
     public static final String ROW_DELETED = "row_deleted";
     public static final String ROW_NOT_DELETED = "row_not_deleted";
+    public static final String ROW_OF_COMMENT_DELETED = "row_of_comment_deleted";
+    public static final String ROW_OF_COMMENT_NOT_DELETED = "row_of_comment_not_deleted";
 
 
     private ParameterName() {
