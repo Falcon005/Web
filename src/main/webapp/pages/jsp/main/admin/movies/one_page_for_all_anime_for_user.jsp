@@ -138,16 +138,33 @@
     </div>
     <div class="row anime-comments"></div>
   </div>
+
   <form action="${pageContext.request.contextPath}/controller.do">
-    <div class="col-12 mb-2">
+    <div class="col-12 mb-2 mx-4 px-5">
       <input type="hidden" name="command" value="comment_for_user"/>
       <label for="inputComment" class="form-label">Comment</label>
       <textarea rows="3" cols="10" id="inputComment" class="form-control" name="comment"></textarea>
-      <button type="submit" name="id" value="${temporary_anime.id}" class="btn btn-primary">Post comment</button>
+      <button type="submit" name="id" value="${temporary_anime.id}" class="btn btn-primary mt-3">Post comment</button>
     </div>
   </form>
 
-  <div class="container">
+  <div class="comments-wrapper px-5 mx-4 mt-3">
+    <jsp:useBean id="comment_list" scope="request" type="java.util.List"/>
+    <c:forEach var="temp_comment" items="${comment_list}">
+      <div class="comment">
+        <div class="comment-avatar">
+        <span class="user-profile text-dark bg-light text-decoration-none p-2 rounded-circle">
+          <i class="fa-regular fa-user"></i>
+        </span>
+        </div>
+        <div class="comment-text">
+            ${temp_comment.comment_text}
+        </div>
+      </div>
+    </c:forEach>
+  </div>
+
+  <%--<div class="container">
     <table class="table table-bordered border-primary table-hover">
       <thead class="bg-primary text-light">
       <tr>
@@ -166,7 +183,7 @@
 
       </tfoot> -->
     </table>
-  </div>
+  </div>--%>
 </section>
 
 

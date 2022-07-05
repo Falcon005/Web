@@ -217,3 +217,28 @@ body {
     display: -webkit-box;
     -webkit-box-orient: vertical;
 }
+
+.comments-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.comment {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    box-shadow: 0 0 5px rgb(0 0 0 / 20%);
+    padding: 10px;
+    max-width: 50%;
+    border-radius: 4px;
+}
+
+.comment-avatar {
+    align-self: start;
+}
+
+.comment-text {
+    margin-left: 20px;
+    padding: 5px;
+    border-radius: 5px;
+}
