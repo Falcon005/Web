@@ -110,6 +110,5 @@ public class AnimeAddCommand implements Command {
             throw new CommandException(serviceException);
         }
 
-
     }
 }

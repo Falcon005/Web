@@ -1,6 +1,7 @@
 package by.ashurmatov.anime.controller.command;
 
 import by.ashurmatov.anime.controller.command.impl.*;
+import by.ashurmatov.anime.validator.CommandValidator;
 
 public enum CommandType {
     ADMIN_ALL_ANIME(new AdminAllAnimeCommand()),
@@ -29,14 +30,15 @@ public enum CommandType {
         this.command = command;
     }
     public static Command defineCommand(String commandStr){
-        CommandType currentType;
-        if (commandStr == null || commandStr.isEmpty()) {
-            currentType = CommandType.DEFAULT_COMMAND;
-            return currentType.command;
-        }
-
-        currentType=CommandType.valueOf(commandStr.toUpperCase());
-        return currentType.command;
+//        CommandType currentType;
+//        if (commandStr == null || commandStr.isEmpty() || !CommandValidator.commandValidator(commandStr)) {
+//            currentType = CommandType.DEFAULT_COMMAND;
+//            return currentType.command;
+//        }
+//
+//        currentType = CommandType.valueOf(commandStr.toUpperCase());
+//        return currentType.command;
+        return CommandValidator.commandValidator(commandStr);
     }
 
     public Command getCommand() {
