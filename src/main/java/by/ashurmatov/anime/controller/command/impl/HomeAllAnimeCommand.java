@@ -10,6 +10,8 @@ import by.ashurmatov.anime.exception.ServiceException;
 import by.ashurmatov.anime.service.AnimeService;
 import by.ashurmatov.anime.service.impl.AnimeServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -18,12 +20,15 @@ import java.util.List;
 public class HomeAllAnimeCommand implements Command {
     private static final Logger logger = LogManager.getLogger(HomeAllAnimeCommand.class);
     @Override
-    public Router execute(HttpServletRequest request) throws CommandException {
+    public Router execute(HttpServletRequest request, HttpServletResponse response) throws CommandException {
         AnimeService animeService = AnimeServiceImpl.getInstance();
+        HttpSession session = request.getSession();
+        logger.info("Current page is " + session.getAttribute(ParameterName.CURRENT_PAGE));
         Router router;
         try {
             List<Anime> animeList = animeService.findAll();
             request.setAttribute(ParameterName.ANIME_LIST,animeList);
+            session.setAttribute(ParameterName.CURRENT_PAGE, PagePath.HOME_MOVIES_PAGE);
             router = new Router(PagePath.HOME_MOVIES_PAGE,Router.Type.FORWARD);
             return router;
         }catch (ServiceException serviceException) {

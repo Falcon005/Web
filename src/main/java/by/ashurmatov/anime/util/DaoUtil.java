@@ -23,11 +23,7 @@ public class DaoUtil {
             }
         }
     }
-    /**
-     * Release all the resources used by dao
-     *
-     * @author Dmitriy Belotskiy
-     */
+
     public static void releaseResources(Connection connection, PreparedStatement preparedStatement) {
         ConnectionPool.INSTANCE.releaseConnection(connection);
         if (preparedStatement != null) {

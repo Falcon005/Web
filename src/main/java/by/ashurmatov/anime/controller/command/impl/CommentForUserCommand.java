@@ -16,6 +16,7 @@ import by.ashurmatov.anime.service.impl.AnimeServiceImpl;
 import by.ashurmatov.anime.service.impl.CommentServiceImpl;
 import by.ashurmatov.anime.service.impl.RatingServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -26,7 +27,7 @@ import java.util.Optional;
 public class CommentForUserCommand implements Command {
     private static final Logger logger = LogManager.getLogger(CommentForUserCommand.class);
     @Override
-    public Router execute(HttpServletRequest request) throws CommandException {
+    public Router execute(HttpServletRequest request, HttpServletResponse response) throws CommandException {
         HttpSession session = request.getSession();
         AnimeService animeService = AnimeServiceImpl.getInstance();
         RatingService ratingService = RatingServiceImpl.getInstance();
@@ -34,6 +35,7 @@ public class CommentForUserCommand implements Command {
         Router router = new Router((String) session.getAttribute(ParameterName.CURRENT_PAGE));
         long id = Long.parseLong(request.getParameter(ParameterName.ANIME_ID));
         String comment_text = request.getParameter(ParameterName.COMMENT);
+//        comment_text = comment_text==null ? "" : comment_text.replaceAll("<", "&lt").replaceAll(">", "&gt");
 
         try {
             Optional<Anime> optionalAnime = animeService.findById(id);

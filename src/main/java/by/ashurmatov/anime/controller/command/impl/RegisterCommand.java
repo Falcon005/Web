@@ -13,6 +13,7 @@ import by.ashurmatov.anime.service.UserService;
 import by.ashurmatov.anime.service.impl.UserServiceImpl;
 import by.ashurmatov.anime.validator.UserValidator;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -26,8 +27,9 @@ public class RegisterCommand implements Command {
     private static final String ALREADY_EXISTING_EMAIL = " - already existing email";
     private static final String ERROR_IN_FILLING_FIELD = "Error in filling field";
     private static final String ERROR_FOR_VALIDATION_IN_FIELDS = "Error for validation for fields";
+    private final String ADMIN_LOGIN = "adminA1";
     @Override
-    public Router execute(HttpServletRequest request) throws CommandException {
+    public Router execute(HttpServletRequest request, HttpServletResponse response) throws CommandException {
 
         UserService userService=UserServiceImpl.getInstance();
         String email=request.getParameter(ParameterName.EMAIL);
@@ -67,13 +69,21 @@ public class RegisterCommand implements Command {
                     logger.info("ALREADY EXISTING EMAIL");
                     return new Router(PagePath.REGISTER_PAGE,Router.Type.FORWARD);
                 }
+                if (username.equals(ADMIN_LOGIN)) {
+                    user.setRole(UserRole.ADMIN);
+                } else {
+                    user.setRole(UserRole.USER);
+                }
+
                 user.setFirstname(firstname);
                 user.setLastname(lastname);
                 user.setPassword(password);
-                user.setRole(UserRole.USER);
                 user.setStatus(Status.ACTIVE);
                 request.setAttribute(ParameterName.USER,user);
                 if(userService.register(user)) {
+                    if (username.equals(ADMIN_LOGIN)) {
+                        return new Router(PagePath.ADMIN_PAGE, Router.Type.FORWARD);
+                    }
                     return new Router(PagePath.HOME_PAGE,Router.Type.FORWARD);
                 }else {
                     request.setAttribute(ParameterName.ERROR_IN_VALIDATION,ERROR_IN_FILLING_FIELD);

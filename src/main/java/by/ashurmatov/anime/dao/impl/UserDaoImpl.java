@@ -10,7 +10,7 @@ import by.ashurmatov.anime.exception.DaoException;
 import by.ashurmatov.anime.entity.User;
 import by.ashurmatov.anime.entity.type.UserRole;
 import by.ashurmatov.anime.pool.ConnectionPool;
-import by.ashurmatov.anime.validator.UserValidator;
+import by.ashurmatov.anime.util.PasswordEncoder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -294,6 +294,7 @@ public class UserDaoImpl implements UserDao {
         if (login.isEmpty() || password.isEmpty()) {
             return false;
         }
+
         try(Connection connection = ConnectionPool.INSTANCE.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(UserQuery.CHECK_FOR_LOGIN)){
             preparedStatement.setString(1,login);
@@ -301,7 +302,8 @@ public class UserDaoImpl implements UserDao {
                 String passwordFromDb;
                 if(resultSet.next()) {
                     passwordFromDb = resultSet.getString("password");
-                    return UserValidator.isPasswordMatches(password,passwordFromDb);
+//                    return UserValidator.isPasswordMatches(password,passwordFromDb);
+                    return PasswordEncoder.checkPassword(password, passwordFromDb);
                 }
             }
         }catch (SQLException exception) {

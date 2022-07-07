@@ -10,6 +10,7 @@ import by.ashurmatov.anime.exception.ServiceException;
 import by.ashurmatov.anime.service.UserService;
 import by.ashurmatov.anime.service.impl.UserServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -19,7 +20,7 @@ import java.util.List;
 public class AdminUsersCommand implements Command {
     private static final Logger logger = LogManager.getLogger(AdminUsersCommand.class);
     @Override
-    public Router execute(HttpServletRequest request) throws CommandException{
+    public Router execute(HttpServletRequest request, HttpServletResponse response) throws CommandException{
         UserService userService = UserServiceImpl.getInstance();
         HttpSession session = request.getSession();//todo with session in some places. Now I'm not using  this. Please use session
         Router router;

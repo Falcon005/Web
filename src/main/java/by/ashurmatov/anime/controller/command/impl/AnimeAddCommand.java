@@ -17,6 +17,7 @@ import by.ashurmatov.anime.service.impl.CommentServiceImpl;
 import by.ashurmatov.anime.service.impl.RatingServiceImpl;
 import by.ashurmatov.anime.validator.AnimeValidator;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -25,7 +26,7 @@ import java.util.Optional;
 public class AnimeAddCommand implements Command {
     private static final Logger logger = LogManager.getLogger(AnimeAddCommand.class);
     @Override
-    public Router execute(HttpServletRequest request) throws CommandException{
+    public Router execute(HttpServletRequest request, HttpServletResponse response) throws CommandException{
         Router router;
         AnimeService animeService = AnimeServiceImpl.getInstance();
         RatingService ratingService = RatingServiceImpl.getInstance();
@@ -85,7 +86,7 @@ public class AnimeAddCommand implements Command {
 
                         if (ratingService.register(rating) && commentService.register(comment)) {
                             logger.info("Row of rating and  row of comment  are created with new Anime");
-                            router = new AdminAllAnimeCommand().execute(request);
+                            router = new AdminAllAnimeCommand().execute(request,response);
                             return router;
                         }else {
                             logger.error("row of rating and row of comment  are not created with new Anime");
@@ -98,7 +99,7 @@ public class AnimeAddCommand implements Command {
                     }
                 } else {
                     logger.error("Anime is already in Database ");
-                    return new AdminAllAnimeCommand().execute(request);
+                    return new AdminAllAnimeCommand().execute(request,response);
                 }
 
             } else {

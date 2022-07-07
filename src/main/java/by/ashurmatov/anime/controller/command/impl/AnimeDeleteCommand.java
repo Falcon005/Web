@@ -13,6 +13,7 @@ import by.ashurmatov.anime.service.impl.AnimeServiceImpl;
 import by.ashurmatov.anime.service.impl.CommentServiceImpl;
 import by.ashurmatov.anime.service.impl.RatingServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -22,7 +23,7 @@ public class AnimeDeleteCommand implements Command {
 
     private static final Logger logger = LogManager.getLogger(AnimeDeleteCommand.class);
     @Override
-    public Router execute(HttpServletRequest request) throws CommandException{
+    public Router execute(HttpServletRequest request, HttpServletResponse response) throws CommandException{
         Router router;
         AnimeService animeService = AnimeServiceImpl.getInstance();
         RatingService ratingService = RatingServiceImpl.getInstance();
@@ -39,13 +40,13 @@ public class AnimeDeleteCommand implements Command {
                 logger.info("Anime which id is " + id + " successfully deleted");
                 logger.info("Row which has anime id is" + id + "successfully deleted");
                 logger.info("Row(s) which has anime id is(are) " + id + "successfully deleted");
-                router = new AdminAllAnimeCommand().execute(request);
+                router = new AdminAllAnimeCommand().execute(request,response);
                 logger.info("Router is " + router + " in AnimeDeleteCommand");
                 request.setAttribute(ParameterName.ANIME_DELETED,animeToString);
                 request.setAttribute(ParameterName.ROW_DELETED, ParameterName.ROW_DELETED);
                 request.setAttribute(ParameterName.ROW_OF_COMMENT_DELETED,ParameterName.ROW_OF_COMMENT_DELETED);
             } else {
-                router = new AdminAllAnimeCommand().execute(request);
+                router = new AdminAllAnimeCommand().execute(request,response);
                 logger.error("Anime which id is " + id + " not deleted");
                 logger.error("Row which has anime id is " + id + " not deleted");
                 logger.info("Row(s) which has anime id is(are) " + id + " not deleted");

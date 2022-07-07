@@ -16,6 +16,7 @@ public final class PagePath {
     public static final String ONE_PAGE_FOR_ALL_ANIME_FOR_USER = "/pages/jsp/main/admin/movies/one_page_for_all_anime_for_user.jsp";
 
 
+
     private PagePath(){
 
     }

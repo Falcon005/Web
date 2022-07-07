@@ -39,7 +39,7 @@ public class Controller extends HttpServlet {
         Command command = CommandType.defineCommand(commandStr);
 
         try {
-            router = command.execute(request);
+            router = command.execute(request,response);
             logger.log(Level.INFO,"moving to " + router.getPage());
             if(router.getActionType() == Router.Type.FORWARD) {
                 request.getRequestDispatcher(router.getPage()).forward(request,response);

@@ -9,6 +9,7 @@ import by.ashurmatov.anime.exception.ServiceException;
 import by.ashurmatov.anime.service.UserService;
 import by.ashurmatov.anime.service.impl.UserServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -18,7 +19,7 @@ import java.util.Optional;
 public class UserBlockCommand implements Command {
     private static final Logger logger = LogManager.getLogger(UserBlockCommand.class);
     @Override
-    public Router execute(HttpServletRequest request) throws CommandException{
+    public Router execute(HttpServletRequest request, HttpServletResponse response) throws CommandException{
         Router router = null;
         UserService userService = UserServiceImpl.getInstance();
         String username = request.getParameter("userName");
@@ -31,7 +32,7 @@ public class UserBlockCommand implements Command {
             }
             if (userService.deleteSoThatToChangeStatusToBlocked(username)) {
                 logger.info("User which username is "+username+" successfully blocked ");
-                router = new AdminUsersCommand().execute(request);
+                router = new AdminUsersCommand().execute(request,response);
                 logger.info("Router is " + router + " in If ");
                 request.setAttribute(ParameterName.USER_BLOCKED,userToString);
 

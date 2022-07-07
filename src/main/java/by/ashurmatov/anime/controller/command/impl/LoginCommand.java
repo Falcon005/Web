@@ -14,6 +14,7 @@ import by.ashurmatov.anime.service.UserService;
 import by.ashurmatov.anime.service.impl.UserServiceImpl;
 import by.ashurmatov.anime.validator.UserValidator;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -26,13 +27,16 @@ public class LoginCommand implements Command {
     private static final String ERROR_MESSAGE = "incorrect login or password";
     private static final String ERROR_MESSAGE_FOR_BLOCK_USER = "Sorry, you are blocked. Please Go to the registration page";
     @Override
-    public Router execute(HttpServletRequest request) throws CommandException {
+    public Router execute(HttpServletRequest request, HttpServletResponse response) throws CommandException {
         boolean isMatched;
         String userName = request.getParameter(ParameterName.USERNAME);
         String password = request.getParameter(ParameterName.PASSWORD);
         HttpSession session = request.getSession();
         Router router;
         UserService userService = UserServiceImpl.getInstance();
+        session.setAttribute(ParameterName.CURRENT_PAGE, PagePath.INDEX_PAGE);
+        logger.info("Current page is " + session.getAttribute(ParameterName.CURRENT_PAGE));
+
 
         try {
             if(UserValidator.isLoginValid(userName) && UserValidator.isPasswordValid(password)) {
@@ -46,17 +50,18 @@ public class LoginCommand implements Command {
                     optionalUser.ifPresent(user -> session.setAttribute(SessionAttributeName.USER,user));
                     request.setAttribute(ParameterName.USERNAME,userName);
                     session.setAttribute(SessionAttributeName.USERNAME,userName);
-//                    session.setAttribute(SessionAttributeName.PASSWORD,password); DEPRECATED
                     session.setAttribute(SessionAttributeName.USER_ROLE,userRole);
                     session.setAttribute(SessionAttributeName.USER_STATUS,userStatus);
 
                     if (session.getAttribute(SessionAttributeName.USER_ROLE) == UserRole.ADMIN) {
+                        session.setAttribute(ParameterName.CURRENT_PAGE, PagePath.HOME_MOVIES_PAGE);
                         router = new Router(PagePath.ADMIN_PAGE,Router.Type.FORWARD);
                     } else {
                         if (session.getAttribute(SessionAttributeName.USER_STATUS) == Status.BLOCKED) {
                             request.setAttribute(ParameterName.ERROR_IN_BLOCKING,ERROR_MESSAGE_FOR_BLOCK_USER);
                             router = new Router(PagePath.LOGIN_PAGE,Router.Type.FORWARD);
                         } else {
+                            session.setAttribute(ParameterName.CURRENT_PAGE, PagePath.HOME_PAGE);
                             router = new Router(PagePath.HOME_PAGE,Router.Type.FORWARD);
                         }
                     }

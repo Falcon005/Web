@@ -10,6 +10,7 @@ import by.ashurmatov.anime.exception.ServiceException;
 import by.ashurmatov.anime.service.AnimeService;
 import by.ashurmatov.anime.service.impl.AnimeServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -18,7 +19,7 @@ import java.util.List;
 public class AdminAllAnimeCommand implements Command {
     private static final Logger logger = LogManager.getLogger(AdminAllAnimeCommand.class);
     @Override
-    public Router execute(HttpServletRequest request) throws CommandException{
+    public Router execute(HttpServletRequest request, HttpServletResponse response) throws CommandException{
         AnimeService animeService = AnimeServiceImpl.getInstance();
         Router router;
         try {

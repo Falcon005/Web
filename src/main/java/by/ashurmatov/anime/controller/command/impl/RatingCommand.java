@@ -13,6 +13,7 @@ import by.ashurmatov.anime.service.RatingService;
 import by.ashurmatov.anime.service.impl.AnimeServiceImpl;
 import by.ashurmatov.anime.service.impl.RatingServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -22,7 +23,7 @@ import java.util.Optional;
 public class RatingCommand implements Command {
     private static final Logger logger = LogManager.getLogger(RatingCommand.class);
     @Override
-    public Router execute(HttpServletRequest request) throws CommandException{
+    public Router execute(HttpServletRequest request, HttpServletResponse response) throws CommandException{
         HttpSession session = request.getSession();
         AnimeService animeService = AnimeServiceImpl.getInstance();
         RatingService ratingService = RatingServiceImpl.getInstance();
