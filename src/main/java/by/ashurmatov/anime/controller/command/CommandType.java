@@ -1,9 +1,11 @@
 package by.ashurmatov.anime.controller.command;
 
 import by.ashurmatov.anime.controller.command.impl.*;
-import by.ashurmatov.anime.validator.CommandValidator;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public enum CommandType {
+
     ADMIN_ALL_ANIME(new AdminAllAnimeCommand()),
     COMMENT_FOR_USER(new CommentForUserCommand()),
     ADMIN_USERS(new AdminUsersCommand()),
@@ -30,15 +32,19 @@ public enum CommandType {
         this.command = command;
     }
     public static Command defineCommand(String commandStr){
-//        CommandType currentType;
-//        if (commandStr == null || commandStr.isEmpty() || !CommandValidator.commandValidator(commandStr)) {
-//            currentType = CommandType.DEFAULT_COMMAND;
-//            return currentType.command;
-//        }
-//
-//        currentType = CommandType.valueOf(commandStr.toUpperCase());
-//        return currentType.command;
-        return CommandValidator.commandValidator(commandStr);
+        final Logger logger = LogManager.getLogger();
+        CommandType currentType = CommandType.DEFAULT_COMMAND;
+        if (commandStr == null && commandStr.isBlank()) {
+            return currentType.command;
+        }
+
+        try {
+            currentType = CommandType.valueOf(commandStr.toUpperCase());
+            return currentType.command;
+        }catch (IllegalArgumentException illegalArgumentException) {
+            logger.error("Unknown command exception " + illegalArgumentException);
+            return currentType.command;
+        }
     }
 
     public Command getCommand() {

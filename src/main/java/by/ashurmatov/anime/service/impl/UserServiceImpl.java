@@ -7,6 +7,7 @@ import by.ashurmatov.anime.dao.impl.UserDaoImpl;
 import by.ashurmatov.anime.entity.User;
 import by.ashurmatov.anime.entity.type.UserRole;
 import by.ashurmatov.anime.service.UserService;
+import by.ashurmatov.anime.util.PasswordEncoder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -16,8 +17,8 @@ import java.util.Optional;
 
 public class UserServiceImpl implements UserService {
     private static final Logger logger = LogManager.getLogger(UserServiceImpl.class);
-    private static UserDaoImpl userDao=UserDaoImpl.getInstance();
-    private static UserServiceImpl instance = new UserServiceImpl();
+    private static final UserDaoImpl userDao=UserDaoImpl.getInstance();
+    private static final UserServiceImpl instance = new UserServiceImpl();
     private UserServiceImpl(){
 
     }
@@ -39,8 +40,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean register(User user) throws ServiceException{
-        boolean isSaved = false;
+        boolean isSaved;
         try {
+            user.setPassword(PasswordEncoder.hashPassword(user.getPassword()));
             isSaved = userDao.insert(user);
         } catch (DaoException e) {
             logger.error("Error in Registration " + e);

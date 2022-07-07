@@ -198,6 +198,7 @@ body {
     min-width: 300px;
 }
 
+
 .for_description p {
     text-overflow: ellipsis;
     overflow: hidden;
@@ -206,17 +207,18 @@ body {
     -webkit-box-orient: vertical;
 }
 
-.for_img_path {
+.for_img_path, .class_for_password {
     max-width: 250px;
 }
 
-.for_img_path p {
+.for_img_path p, .class_for_password p {
     text-overflow: ellipsis;
     overflow: hidden;
     -webkit-line-clamp: 1;
     display: -webkit-box;
     -webkit-box-orient: vertical;
 }
+
 
 .comments-wrapper {
     display: flex;

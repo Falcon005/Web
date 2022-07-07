@@ -46,7 +46,6 @@ public class LoginCommand implements Command {
                     optionalUser.ifPresent(user -> session.setAttribute(SessionAttributeName.USER,user));
                     request.setAttribute(ParameterName.USERNAME,userName);
                     session.setAttribute(SessionAttributeName.USERNAME,userName);
-//                    session.setAttribute(SessionAttributeName.PASSWORD,password); DEPRECATED
                     session.setAttribute(SessionAttributeName.USER_ROLE,userRole);
                     session.setAttribute(SessionAttributeName.USER_STATUS,userStatus);
 

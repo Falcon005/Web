@@ -34,6 +34,7 @@ public class CommentForUserCommand implements Command {
         Router router = new Router((String) session.getAttribute(ParameterName.CURRENT_PAGE));
         long id = Long.parseLong(request.getParameter(ParameterName.ANIME_ID));
         String comment_text = request.getParameter(ParameterName.COMMENT);
+//        comment_text = comment_text==null ? "" : comment_text.replaceAll("<", "&lt").replaceAll(">", "&gt");
 
         try {
             Optional<Anime> optionalAnime = animeService.findById(id);

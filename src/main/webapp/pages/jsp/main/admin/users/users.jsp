@@ -102,7 +102,9 @@
                     <td>${tempUser.firstname}</td>
                     <td>${tempUser.lastname}</td>
                     <td>${tempUser.userName}</td>
-                    <td>${tempUser.password}</td>
+                    <td class = "class_for_password">
+                        <p>${tempUser.password}</p>
+                    </td>
                     <td>${tempUser.status}</td>
                     <td>
                         <div class="btn-group">
