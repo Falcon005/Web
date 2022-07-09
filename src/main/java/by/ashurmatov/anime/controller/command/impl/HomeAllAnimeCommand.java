@@ -22,13 +22,11 @@ public class HomeAllAnimeCommand implements Command {
     @Override
     public Router execute(HttpServletRequest request, HttpServletResponse response) throws CommandException {
         AnimeService animeService = AnimeServiceImpl.getInstance();
-        HttpSession session = request.getSession();
-        logger.info("Current page is " + session.getAttribute(ParameterName.CURRENT_PAGE));
+
         Router router;
         try {
             List<Anime> animeList = animeService.findAll();
             request.setAttribute(ParameterName.ANIME_LIST,animeList);
-            session.setAttribute(ParameterName.CURRENT_PAGE, PagePath.HOME_MOVIES_PAGE);
             router = new Router(PagePath.HOME_MOVIES_PAGE,Router.Type.FORWARD);
             return router;
         }catch (ServiceException serviceException) {

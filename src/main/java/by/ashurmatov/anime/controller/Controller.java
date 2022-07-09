@@ -4,6 +4,7 @@ import by.ashurmatov.anime.controller.attribute.ParameterName;
 import by.ashurmatov.anime.controller.command.Command;
 import by.ashurmatov.anime.controller.command.CommandType;
 import by.ashurmatov.anime.controller.command.Router;
+import by.ashurmatov.anime.controller.path.PagePath;
 import by.ashurmatov.anime.exception.CommandException;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebServlet;
@@ -32,15 +33,23 @@ public class Controller extends HttpServlet {
         processRequest(request,response);
     }
     private void processRequest(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException{
-
+        HttpSession session = request.getSession();
         Router router;
         String commandStr = request.getParameter(ParameterName.COMMAND);
         logger.log(Level.INFO,"Command is " + commandStr);
         Command command = CommandType.defineCommand(commandStr);
 
         try {
-            router = command.execute(request,response);
+            if (commandStr.equals("logout")) {
+                session.setAttribute(ParameterName.CURRENT_PAGE, PagePath.INDEX_PAGE);
+                router = command.execute(request,response);
+            } else {
+                router = command.execute(request,response);
+                session.setAttribute(ParameterName.CURRENT_PAGE, router.getPage());
+            }
+
             logger.log(Level.INFO,"moving to " + router.getPage());
+
             if(router.getActionType() == Router.Type.FORWARD) {
                 request.getRequestDispatcher(router.getPage()).forward(request,response);
             }else {
@@ -55,6 +64,6 @@ public class Controller extends HttpServlet {
 
     @Override
     public void destroy() {
-//        DynamicConnectionPool.getInstance().destroyPool();
+
     }
 }

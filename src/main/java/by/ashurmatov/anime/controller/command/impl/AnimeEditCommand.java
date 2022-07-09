@@ -27,7 +27,7 @@ public class AnimeEditCommand implements Command {
         Anime animeForUpdate;
         long id = (long) session.getAttribute(ParameterName.ANIME_ID);
         logger.info("Anime id is " + id);
-        System.out.println(id);
+
 
         try {
             Optional<Anime> optionalAnime = animeService.findById(id);

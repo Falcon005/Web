@@ -31,6 +31,7 @@ public class RatingCommand implements Command {
         long id = Long.parseLong(request.getParameter(ParameterName.ANIME_ID));
         double value = Double.parseDouble(request.getParameter(ParameterName.RATE));
 
+
         try {
             Optional<Anime> optionalAnime = animeService.findById(id);
             if (ratingService.updateValue(id,value)) {

@@ -28,6 +28,7 @@ public class OnePageForAllAnimeCommand implements Command {
         AnimeService animeService = AnimeServiceImpl.getInstance();
         RatingService ratingService = RatingServiceImpl.getInstance();
         Router router;
+
         long id = Long.parseLong(request.getParameter(ParameterName.ANIME_ID));
         try {
             Optional<Anime> optionalAnime = animeService.findById(id);

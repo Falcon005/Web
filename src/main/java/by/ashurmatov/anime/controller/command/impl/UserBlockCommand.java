@@ -24,6 +24,7 @@ public class UserBlockCommand implements Command {
         UserService userService = UserServiceImpl.getInstance();
         String username = request.getParameter("userName");
         logger.info("Username is " + username);
+
         try {
             Optional<User> optionalUser = userService.findByLogin(username);
             String userToString = "";

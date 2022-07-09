@@ -24,6 +24,7 @@ public enum CommandType {
     ONE_PAGE_FOR_ALL_ANIME(new OnePageForAllAnimeCommand()),
     ONE_PAGE_FOR_ALL_ANIME_FOR_USER(new OnePageForAllAnimeForUserCommand()),
     HOME_ALL_ANIME_FOR_USER(new HomeAllAnimeForUserCommand()),
+    CHANGE_LANGUAGE(new ChangeLanguageCommand()),
     DEFAULT_COMMAND(new DefaultCommand());
 
     Command command;

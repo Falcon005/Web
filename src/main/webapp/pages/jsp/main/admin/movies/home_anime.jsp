@@ -7,6 +7,9 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%--<fmt:setLocale value="${sessionScope.currentLocale}"/>--%>
+<%--<fmt:setBundle basename="language" scope="application"/>--%>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -59,6 +62,16 @@
                             <li><a class="dropdown-item" href="#">EN</a></li>
                             <li><a class="dropdown-item" href="#">RU</a></li>
                             <li><a class="dropdown-item" href="#">UZ</a></li>
+<%--                            <form action="${pageContext.request.contextPath}/controller.do">--%>
+<%--                                <li><input class="dropdown-item" type="hidden" name="command" value="change_language"/></li>--%>
+<%--                                <li><input class="dropdown-item" type="radio" name="currentLocale" value="en"/><fmt:message key="en" /></li>--%>
+<%--                                <li><input class="dropdown-item" type="radio" name="currentLocale" value="ru"/><fmt:message key="ru" /></li>--%>
+<%--                                <li><input class="dropdown-item" type="radio" name="currentLocale" value="uz"/><fmt:message key="uz" /></li>--%>
+<%--                                <li><input class="dropdown-item" type="submit"></li>--%>
+<%--                            </form>--%>
+<%--                            <li><a class="dropdown-item" href="${pageContext.request.contextPath}/controller.do?currentLocale=en"><fmt:message key="en" /></a></li>--%>
+<%--                            <li><a class="dropdown-item" href="${pageContext.request.contextPath}/controller.do?currentLocale=ru"><fmt:message key="ru"/></a></li>--%>
+<%--                            <li><a class="dropdown-item" href="${pageContext.request.contextPath}/controller.do?currentLocale=ru"><fmt:message key="uz"/></a></li>--%>
                         </ul>
                     </li>
                 </ul>

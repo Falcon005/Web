@@ -35,7 +35,6 @@ public class LoginCommand implements Command {
         Router router;
         UserService userService = UserServiceImpl.getInstance();
         session.setAttribute(ParameterName.CURRENT_PAGE, PagePath.INDEX_PAGE);
-        logger.info("Current page is " + session.getAttribute(ParameterName.CURRENT_PAGE));
 
 
         try {
@@ -54,7 +53,6 @@ public class LoginCommand implements Command {
                     session.setAttribute(SessionAttributeName.USER_STATUS,userStatus);
 
                     if (session.getAttribute(SessionAttributeName.USER_ROLE) == UserRole.ADMIN) {
-                        session.setAttribute(ParameterName.CURRENT_PAGE, PagePath.HOME_MOVIES_PAGE);
                         router = new Router(PagePath.ADMIN_PAGE,Router.Type.FORWARD);
                     } else {
                         if (session.getAttribute(SessionAttributeName.USER_STATUS) == Status.BLOCKED) {
@@ -67,6 +65,7 @@ public class LoginCommand implements Command {
                     }
                 }else {
                     request.setAttribute(ParameterName.ERROR_MESSAGE_LOGIN,ERROR_MESSAGE);
+
                     router = new Router(PagePath.LOGIN_PAGE,Router.Type.FORWARD);
                 }
             }else {

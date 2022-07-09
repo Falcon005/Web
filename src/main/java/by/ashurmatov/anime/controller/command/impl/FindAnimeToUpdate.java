@@ -25,6 +25,7 @@ public class FindAnimeToUpdate implements Command {
         AnimeService animeService = AnimeServiceImpl.getInstance();
         Anime toUpdate;
         long id = Long.parseLong(request.getParameter(ParameterName.ANIME_ID));
+
         try {
             Optional<Anime> optionalAnime = animeService.findById(id);
             if (optionalAnime.isEmpty()) {

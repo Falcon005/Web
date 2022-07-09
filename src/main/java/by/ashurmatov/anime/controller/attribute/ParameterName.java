@@ -19,6 +19,7 @@ public final class ParameterName {
     public static final String COMMENT_LIST = "comment_list";
 
     public static final String COMMENT = "comment";
+    public static final String CURRENT_LOCALE = "currentLocale";
 
     /**
      * Anime Parameter

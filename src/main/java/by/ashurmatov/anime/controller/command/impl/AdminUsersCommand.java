@@ -22,7 +22,8 @@ public class AdminUsersCommand implements Command {
     @Override
     public Router execute(HttpServletRequest request, HttpServletResponse response) throws CommandException{
         UserService userService = UserServiceImpl.getInstance();
-        HttpSession session = request.getSession();//todo with session in some places. Now I'm not using  this. Please use session
+        HttpSession session = request.getSession();
+
         Router router;
         try {
             List<User> users = userService.findAll();

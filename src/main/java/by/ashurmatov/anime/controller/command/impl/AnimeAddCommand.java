@@ -18,6 +18,7 @@ import by.ashurmatov.anime.service.impl.RatingServiceImpl;
 import by.ashurmatov.anime.validator.AnimeValidator;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -48,6 +49,9 @@ public class AnimeAddCommand implements Command {
         logger.info("Age limit : " + ageLimitString);
         logger.info("Description of anime: " + description);
         logger.info("Image path of picture of anime " + imagePath);
+
+        HttpSession session = request.getSession();
+        logger.info("<-----------Current page is " + session.getAttribute(ParameterName.CURRENT_PAGE)+"---------------->");
 
         if (!AnimeValidator.validateInput(animeName,country,createdYearString,genre,ageLimitString,description,imagePath)) {
             logger.error("Invalid input");

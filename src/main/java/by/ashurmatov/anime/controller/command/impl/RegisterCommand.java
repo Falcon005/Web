@@ -14,6 +14,7 @@ import by.ashurmatov.anime.service.impl.UserServiceImpl;
 import by.ashurmatov.anime.validator.UserValidator;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -49,7 +50,6 @@ public class RegisterCommand implements Command {
         String errorMessage = UserValidator.validateUserForRegister(email,firstname,lastname,username,password);
         if(!errorMessage.isEmpty()) {
             request.setAttribute(ParameterName.ERROR_IN_VALIDATION,ERROR_FOR_VALIDATION_IN_FIELDS);
-
             return new Router(PagePath.REGISTER_PAGE,Router.Type.REDIRECT);
         } else{
 

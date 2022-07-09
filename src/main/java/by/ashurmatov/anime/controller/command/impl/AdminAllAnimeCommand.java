@@ -11,6 +11,7 @@ import by.ashurmatov.anime.service.AnimeService;
 import by.ashurmatov.anime.service.impl.AnimeServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -22,6 +23,8 @@ public class AdminAllAnimeCommand implements Command {
     public Router execute(HttpServletRequest request, HttpServletResponse response) throws CommandException{
         AnimeService animeService = AnimeServiceImpl.getInstance();
         Router router;
+        HttpSession session = request.getSession();
+
         try {
             List<Anime> animeList = animeService.findAll();
             request.setAttribute(ParameterName.ANIME_LIST,animeList);

@@ -14,6 +14,7 @@ import by.ashurmatov.anime.service.impl.CommentServiceImpl;
 import by.ashurmatov.anime.service.impl.RatingServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -30,6 +31,7 @@ public class AnimeDeleteCommand implements Command {
         CommentService commentService = CommentServiceImpl.getInstance();
         long id = Long.parseLong(request.getParameter(ParameterName.ANIME_ID));
         logger.info("id of Anime is " + id);
+
         try {
             Optional<Anime> optionalAnime = animeService.findById(id);
             String animeToString = "";
